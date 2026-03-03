@@ -24,7 +24,9 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         <ClerkProvider
             appearance={{
                 signIn: {theme: shadcn},
-                signUp: {theme: shadcn}
+                signUp: {theme: shadcn},
+                userButton: {theme: shadcn},
+                userProfile: {theme: shadcn}
             }}
         >
             <TRPCReactProvider>
