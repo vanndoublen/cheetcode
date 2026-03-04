@@ -5,10 +5,16 @@ import { cn } from "@/lib/utils"
 
 const navBarContents = [
     {
+        slug: "home",
+        name: "Home",
+        url: "/home",
+    },
+    {
         slug: "problems",
         name: "Problems",
         url: "/problems",
     },
+
 ]
 
 export const NavBar = () => {
@@ -25,7 +31,7 @@ export const NavBar = () => {
                             asChild
                             variant="outline"
                             className={cn(
-                                "transition-colors border-0 bg-transparent! hover:bg-transparent!",
+                                "w-20 transition-colors border-0 bg-transparent! hover:bg-transparent!",
                                 "text-muted-foreground hover:text-foreground",
                                 isActive &&
                                 "border-b transition-all duration-100 border-primary text-foreground"
