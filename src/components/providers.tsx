@@ -1,32 +1,22 @@
 "use client";
 
+import { shadcn } from "@clerk/themes";
 import { ClerkProvider } from "@clerk/nextjs"
 import { TRPCReactProvider } from "@/trpc/client"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
-import { ThemeProvider } from "./theme-provider"
-import { useTheme } from "next-themes";
-
-import { dark, neobrutalism, shadcn } from "@clerk/themes";
-import { useEffect } from "react";
 import { Header } from "./header";
+import { ThemeProvider } from "./theme-provider"
+
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-    const { theme } = useTheme();
-
-    useEffect(() => {
-        console.log("asdf");
-        console.log(theme);
-
-    }, []);
-
     return (
         <ClerkProvider
             appearance={{
-                signIn: {theme: shadcn},
-                signUp: {theme: shadcn},
-                userButton: {theme: shadcn},
-                userProfile: {theme: shadcn}
+                signIn: { theme: shadcn },
+                signUp: { theme: shadcn },
+                userButton: { theme: shadcn },
+                userProfile: { theme: shadcn }
             }}
         >
             <TRPCReactProvider>
@@ -37,8 +27,12 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
                         enableSystem
                         disableTransitionOnChange
                     >
-                        <Header />
-                        {children}
+                        <main className="flex flex-col">
+                            <Header />
+                            <div className="flex-1">
+                                {children}
+                            </div>
+                        </main>
                     </ThemeProvider>
                 </TooltipProvider>
             </TRPCReactProvider>
