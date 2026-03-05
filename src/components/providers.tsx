@@ -8,6 +8,8 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { Header } from "./header";
 import { ThemeProvider } from "./theme-provider"
 
+import { NuqsAdapter } from "nuqs/adapters/next/app"
+
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -20,21 +22,23 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
             }}
         >
             <TRPCReactProvider>
-                <TooltipProvider>
-                    <ThemeProvider
-                        attribute="class"
-                        defaultTheme="system"
-                        enableSystem
-                        disableTransitionOnChange
-                    >
-                        <main className="flex flex-col">
-                            <Header />
-                            <div className="flex-1">
-                                {children}
-                            </div>
-                        </main>
-                    </ThemeProvider>
-                </TooltipProvider>
+                <NuqsAdapter>
+                    <TooltipProvider>
+                        <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem
+                            disableTransitionOnChange
+                        >
+                            <main className="flex flex-col">
+                                <Header />
+                                <div className="flex-1">
+                                    {children}
+                                </div>
+                            </main>
+                        </ThemeProvider>
+                    </TooltipProvider>
+                </NuqsAdapter>
             </TRPCReactProvider>
         </ClerkProvider>
     )

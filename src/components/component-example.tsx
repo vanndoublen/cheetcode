@@ -411,13 +411,13 @@ function FormExample() {
                     <SelectTrigger id="small-form-role">
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-transparent backdrop-blur-sm!">
                       <SelectGroup>
                         <SelectItem value="developer">Developer</SelectItem>
                         <SelectItem value="designer">Designer</SelectItem>
                         <SelectItem value="manager">Manager</SelectItem>
                         <SelectItem value="other">Other</SelectItem>
-                      </SelectGroup>
+                      </SelectGroup>``
                     </SelectContent>
                   </Select>
                 </Field>
