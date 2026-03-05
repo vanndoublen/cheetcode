@@ -1,5 +1,6 @@
 import { PAGINATION } from "@/configs/constants";
-import { parseAsInteger, parseAsString } from "nuqs/server";
+import { Difficulty } from "@/generated/prisma/enums";
+import { parseAsInteger, parseAsString, parseAsStringEnum } from "nuqs/server";
 
 export const problemsParams = {
   page: parseAsInteger
@@ -8,7 +9,8 @@ export const problemsParams = {
   pageSize: parseAsInteger
     .withDefault(PAGINATION.DEFAULT_PAGE_SIZE)
     .withOptions({ clearOnDefault: true }),
-  search: parseAsString
-    .withDefault("")
-    .withOptions({ clearOnDefault: true }),
+  search: parseAsString.withDefault("").withOptions({ clearOnDefault: true }),
+  difficulty: parseAsStringEnum<Difficulty>(
+    Object.values(Difficulty),
+  ),
 };

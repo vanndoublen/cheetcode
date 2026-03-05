@@ -14,7 +14,7 @@ interface Props {
 
 const Page = async ({ searchParams }: Props) => {
     const params = await problemsParamsLoader(searchParams);
-    prefetchProblems(params);
+    prefetchProblems({...params, difficulty: params.difficulty ?? undefined,});
     return (
         <ProblemsContainer>
             <HydrateClient>
