@@ -65,10 +65,10 @@ export const ProblemsList = () => {
                         <TableHead className="text-right">Difficulty</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody className="cursor-pointer">
+                <TableBody>
                     {problems.items.map((problem, index) => (
                         <TableRow key={problem.slug} className="h-10!">
-                            <TableCell className="font-medium">{index + 1}</TableCell>
+                            <TableCell className="font-medium">{((problems.page - 1) * problems.pageSize) + index + 1}</TableCell>
                             <TableCell>{problem.title}</TableCell>
                             <TableCell>{problem.category?.name}</TableCell>
                             <TableCell>{renderTag(problem.tags)}</TableCell>

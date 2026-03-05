@@ -20,13 +20,13 @@ export const ProblemsContainer = ({ children }: { children: React.ReactNode }) =
                     <SearchInput
                         placeholder="Search Problems"
                     />
-                    {children}
                     <ProblemsPagination
                         disabled={problems.isPending}
                         totalPages={problems.data.totalPages}
                         page={problems.data.page}
                         onPageChange={(page) => setParams({ ...params, page })}
                     />
+                    {children}
                 </div>
             </div>
         </div>
