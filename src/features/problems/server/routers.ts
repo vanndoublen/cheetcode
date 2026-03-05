@@ -18,11 +18,23 @@ export const problemsRouter = createTRPCRouter({
         difficulty: z
           .enum(Object.values(Difficulty) as [string, ...string[]])
           .nullish() // accepts null, undefined, or valid enum
-          .transform((val) => val ?? undefined), // convert null → undefined for prisma
+          .transform((val) => val ?? undefined) as z.ZodType<
+          Difficulty | undefined
+        >, // convert null → undefined for prisma
+        category: z
+          .literal([
+            "Algorithms",
+            "Graph Theory",
+            "Data Structures",
+            "Concurrency",
+            "Database",
+          ])
+          .nullish()
+          .transform((val) => val ?? undefined),
       }),
     )
-    .query(async ({ input, ctx }) => {
-      const { page, pageSize, search, difficulty } = input;
+    .query(async ({ input }) => {
+      const { page, pageSize, search, difficulty, category } = input;
 
       const [items, totalCount] = await Promise.all([
         prisma.problem.findMany({
@@ -34,6 +46,9 @@ export const problemsRouter = createTRPCRouter({
               mode: "insensitive",
             },
             difficulty: difficulty,
+            category: {
+              name: category,
+            },
           },
           orderBy: {
             updatedAt: "desc",
@@ -62,6 +77,9 @@ export const problemsRouter = createTRPCRouter({
               mode: "insensitive",
             },
             difficulty: difficulty,
+            category: {
+              name: category,
+            },
           },
         }),
       ]);
