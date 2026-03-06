@@ -2,31 +2,40 @@
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useProblemsParams } from "../hooks/use-problems-params";
+import { startTransition, useEffect, useState } from "react";
+import { PAGINATION } from "@/configs/constants";
 
 const categories = [
-  "Algorithms",
-  "Graph Theory",
-  "Data Structures",
-  "Concurrency",
-  "Database"
+    "Algorithms",
+    "Graph Theory",
+    "Data Structures",
+    "Concurrency",
+    "Database"
 ] as const;
 
 type Category = typeof categories[number];
 
 export const CategorySelectFilter = () => {
     const [params, setParams] = useProblemsParams();
-    const handleChange = (value: string) => {
-        if (value === "all") {
-            setParams({ category: null });
-        } else {
-            setParams({ category: value as Category});
-        }
+    const [value, setValue] = useState(params.category ?? "all");
+
+    useEffect(() => {
+        setValue(params.category ?? "all");
+    }, [params.category]);
+
+    const handleChange = (v: string) => {
+        setValue(v); // instant UI update
+
+        startTransition(() => {
+            if (v === "all") {
+                setParams({ category: null, page: PAGINATION.DEFAULT_PAGE });
+            } else {
+                setParams({ category: v as Category, page: PAGINATION.DEFAULT_PAGE });
+            }
+        });
     };
     return (
-        <Select
-            value={params.category ?? "all"}
-            onValueChange={handleChange}
-        >
+        <Select value={value} onValueChange={handleChange}>
             <SelectTrigger id="small-form-role" className="w-full">
                 <SelectValue placeholder="Select a category" />
             </SelectTrigger>

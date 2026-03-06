@@ -35,36 +35,39 @@ export const problemsRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const { page, pageSize, search, difficulty, category } = input;
-
       const [items, totalCount] = await Promise.all([
         prisma.problem.findMany({
           skip: (page - 1) * pageSize,
           take: pageSize,
           where: {
-            title: {
-              contains: search,
-              mode: "insensitive",
-            },
             difficulty: difficulty,
             category: {
               name: category,
             },
-          },
-          orderBy: {
-            updatedAt: "desc",
-          },
-          include: {
-            category: {
-              select: {
-                name: true,
-              },
+            title: {
+              contains: search,
+              mode: "insensitive",
             },
+          },
+          orderBy: [
+            {
+              externalId: "asc",
+            },
+            
+          ],
+          select: {
+            slug: true,
+            title: true,
+            difficulty: true,
+
+            category: {
+              select: { name: true },
+            },
+
             tags: {
               select: {
                 tag: {
-                  select: {
-                    name: true,
-                  },
+                  select: { name: true },
                 },
               },
             },
@@ -72,13 +75,13 @@ export const problemsRouter = createTRPCRouter({
         }),
         prisma.problem.count({
           where: {
-            title: {
-              contains: search,
-              mode: "insensitive",
-            },
             difficulty: difficulty,
             category: {
               name: category,
+            },
+            title: {
+              contains: search,
+              mode: "insensitive",
             },
           },
         }),
@@ -87,6 +90,8 @@ export const problemsRouter = createTRPCRouter({
       const totalPages = Math.ceil(totalCount / pageSize);
       const hasNextPage = page < totalPages;
       const hasPreviousPage = page > 1;
+
+      if (hasNextPage) items.pop();
 
       return {
         items,

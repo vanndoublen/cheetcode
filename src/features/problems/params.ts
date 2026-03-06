@@ -1,6 +1,7 @@
 import { PAGINATION } from "@/configs/constants";
 import { Difficulty } from "@/generated/prisma/enums";
 import {
+  inferParserType,
   parseAsInteger,
   parseAsString,
   parseAsStringEnum,
@@ -24,3 +25,5 @@ export const problemsParams = {
     "Database",
   ]).withOptions({ clearOnDefault: true }),
 };
+
+export type ProblemParams = inferParserType<typeof problemsParams>;

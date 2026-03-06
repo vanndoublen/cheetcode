@@ -1,18 +1,23 @@
 "use client";
 
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table"
 
 import { useSuspenseProblems } from "../hooks/use-problems";
-import { Difficulty } from "@/generated/prisma/enums";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CloudFreeIcons, Loading03FreeIcons, Task01FreeIcons } from "@hugeicons/core-free-icons";
+import { useAuth } from "@clerk/nextjs";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
+import { Button } from "@/components/ui/button";
 
 
 const renderDifficulty = (difficulty: string) => {
@@ -52,31 +57,67 @@ const renderTag = (
 
 
 export const ProblemsList = () => {
-    const { data: problems } = useSuspenseProblems();
+  const { data: problems, isFetching, isPending, isLoading, isRefetching, fetchStatus } = useSuspenseProblems();
+  const isSpinning = isFetching || isPending || isLoading || isRefetching || fetchStatus === "fetching";
+
+  if (isSpinning) {
     return (
-        <div className="p-4 border border-inset">
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[100px]">No</TableHead>
-                        <TableHead className="truncate">Title</TableHead>
-                        <TableHead>Category</TableHead>
-                        <TableHead>Tags</TableHead>
-                        <TableHead className="text-right">Difficulty</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {problems.items.map((problem, index) => (
-                        <TableRow key={problem.slug} className="h-10!">
-                            <TableCell className="font-medium">{((problems.page - 1) * problems.pageSize) + index + 1}</TableCell>
-                            <TableCell>{problem.title}</TableCell>
-                            <TableCell>{problem.category?.name}</TableCell>
-                            <TableCell>{renderTag(problem.tags)}</TableCell>
-                            <TableCell className="text-right">{renderDifficulty(problem.difficulty)}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </div>
+      <ProblemLoading />
     )
+  }
+
+  if (problems.items.length === 0) {
+    return <ProblemEmpty />
+  }
+
+  return (
+    <div className="p-4 border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-25">No</TableHead>
+            <TableHead className="truncate">Title</TableHead>
+            <TableHead>Category</TableHead>
+            <TableHead>Tags</TableHead>
+            <TableHead className="text-right">Difficulty</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {problems.items.map((problem, index) => (
+            <TableRow key={problem.slug} className="h-10!">
+              <TableCell className="font-medium">{((problems.page - 1) * problems.pageSize) + index + 1}</TableCell>
+              <TableCell>{problem.title}</TableCell>
+              <TableCell>{problem.category?.name}</TableCell>
+              <TableCell>{renderTag(problem.tags)}</TableCell>
+              <TableCell className="text-right">{renderDifficulty(problem.difficulty)}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
+export const ProblemLoading = () => {
+  return (
+    <div className="flex flex-col items-center justify-center w-full mx-auto">
+      <HugeiconsIcon icon={Loading03FreeIcons} strokeWidth={2} className="animate-spin" />
+    </div>
+  )
+}
+
+const ProblemEmpty = () => {
+  return (
+    <Empty className="border border-dashed">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <HugeiconsIcon icon={Task01FreeIcons} strokeWidth={2} />
+        </EmptyMedia>
+        <EmptyTitle>Empty</EmptyTitle>
+        <EmptyDescription>
+          No problems related to the filters found.
+        </EmptyDescription>
+      </EmptyHeader>
+    </Empty>
+  )
 }

@@ -59,6 +59,8 @@ model Problem {
   @@index([difficulty])
   @@index([isPublished])
   @@index([categoryId])
+  @@index([updatedAt(sort: Desc)])
+  @@index([title, updatedAt(sort: Desc)], type: BTree)
 }
 
 model Category {

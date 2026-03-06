@@ -13,12 +13,16 @@ export const ProblemsContainer = ({ children }: { children: React.ReactNode }) =
     return (
         <div className="grid grid-cols-9 p-4">
             <div className="col-span-2">
-                <FiltersView />
+                <FiltersView
+
+                />
             </div>
             <div className="col-span-7">
                 <div className="flex flex-col gap-y-4">
                     <SearchInput
                         placeholder="Search Problems"
+                        params={params}
+                        setParams={setParams}
                     />
                     <ProblemsPagination
                         disabled={problems.isPending}
