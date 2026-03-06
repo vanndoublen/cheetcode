@@ -1,5 +1,6 @@
 import { CategorySelectFilter } from "./category-search-filter"
 import { DifficultiesSelectFilter } from "./difficulties-select-filter"
+import { TagsFilter } from "./tags-filter"
 
 export const FiltersView = () => {
     return (
@@ -13,6 +14,11 @@ export const FiltersView = () => {
             <div className="flex flex-col gap-2">
                 <span className="text-xs">Category</span>
                 <CategorySelectFilter />
+            </div>
+
+            <div className="flex flex-col gap-2">
+                <span className="text-xs">Problem tags</span>
+                <TagsFilter />
             </div>
         </div>
     )

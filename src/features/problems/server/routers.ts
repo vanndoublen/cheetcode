@@ -31,29 +31,19 @@ export const problemsRouter = createTRPCRouter({
           ])
           .nullish()
           .transform((val) => val ?? undefined),
+        tags: z.array(z.string()).optional(),
       }),
     )
     .query(async ({ input }) => {
-      const { page, pageSize, search, difficulty, category } = input;
+      const { page, pageSize, search, difficulty, category, tags } = input;
       const [items, totalCount] = await Promise.all([
         prisma.problem.findMany({
           skip: (page - 1) * pageSize,
           take: pageSize,
-          where: {
-            difficulty: difficulty,
-            category: {
-              name: category,
-            },
-            title: {
-              contains: search,
-              mode: "insensitive",
-            },
-          },
           orderBy: [
             {
               externalId: "asc",
             },
-            
           ],
           select: {
             slug: true,
@@ -72,6 +62,26 @@ export const problemsRouter = createTRPCRouter({
               },
             },
           },
+
+          where: {
+            difficulty: difficulty,
+            category: {
+              name: category,
+            },
+            title: {
+              contains: search,
+              mode: "insensitive",
+            },
+            tags: tags?.length
+              ? {
+                  some: {
+                    tag: {
+                      name: { in: tags },
+                    },
+                  },
+                }
+              : undefined,
+          },
         }),
         prisma.problem.count({
           where: {
@@ -83,6 +93,15 @@ export const problemsRouter = createTRPCRouter({
               contains: search,
               mode: "insensitive",
             },
+            tags: tags?.length
+              ? {
+                  some: {
+                    tag: {
+                      name: { in: tags },
+                    },
+                  },
+                }
+              : undefined,
           },
         }),
       ]);
