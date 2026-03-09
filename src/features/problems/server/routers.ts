@@ -122,4 +122,23 @@ export const problemsRouter = createTRPCRouter({
         hasPreviousPage,
       };
     }),
+
+  getOne: protectedProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      return await prisma.problem.findUnique({
+        where: {
+          slug: input.slug,
+        },
+        include:{
+          examples: true,
+          hints: true,
+          followUps: true
+        }
+      });
+    }),
 });

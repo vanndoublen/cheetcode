@@ -18,6 +18,7 @@ import { useAuth } from "@clerk/nextjs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 
 const renderDifficulty = (difficulty: string) => {
@@ -57,6 +58,8 @@ const renderTag = (
 
 
 export const ProblemsList = () => {
+  const router = useRouter();
+
   const { data: problems, isFetching, isPending, isLoading, isRefetching, fetchStatus } = useSuspenseProblems();
   const isSpinning = isFetching || isPending || isLoading || isRefetching || fetchStatus === "fetching";
 
@@ -86,7 +89,13 @@ export const ProblemsList = () => {
           {problems.items.map((problem, index) => (
             <TableRow key={problem.slug} className="h-10!">
               <TableCell className="font-medium">{((problems.page - 1) * problems.pageSize) + index + 1}</TableCell>
-              <TableCell>{problem.title}</TableCell>
+              <TableCell
+                className="cursor-pointer hover:underline"
+                onClick={() => router.push(`/problems/${problem.slug}`)}
+                
+              >
+                {problem.title}
+              </TableCell>
               <TableCell>{problem.category?.name}</TableCell>
               <TableCell>{renderTag(problem.tags)}</TableCell>
               <TableCell className="text-right">{renderDifficulty(problem.difficulty)}</TableCell>
