@@ -1,11 +1,12 @@
 import { PAGINATION } from "@/configs/constants";
 import { Difficulty } from "@/generated/prisma/enums";
 import prisma from "@/lib/db";
-import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import { TRPCError } from "@trpc/server";
 import z from "zod";
 
 export const problemsRouter = createTRPCRouter({
-  getMany: protectedProcedure
+  getMany: baseProcedure
     .input(
       z.object({
         page: z.number().default(PAGINATION.DEFAULT_PAGE),
@@ -34,7 +35,10 @@ export const problemsRouter = createTRPCRouter({
         tags: z.array(z.string()).optional(),
       }),
     )
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
+      // if (!ctx.auth.userId) {
+      //   throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
+      // }
       const { page, pageSize, search, difficulty, category, tags } = input;
       const [items, totalCount] = await Promise.all([
         prisma.problem.findMany({
@@ -130,15 +134,18 @@ export const problemsRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input, ctx }) => {
+      if (!ctx.auth.userId) {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
+      }
       return await prisma.problem.findUnique({
         where: {
           slug: input.slug,
         },
-        include:{
+        include: {
           examples: true,
           hints: true,
-          followUps: true
-        }
+          followUps: true,
+        },
       });
     }),
 });
