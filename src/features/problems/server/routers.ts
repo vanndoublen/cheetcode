@@ -127,16 +127,13 @@ export const problemsRouter = createTRPCRouter({
       };
     }),
 
-  getOne: protectedProcedure
+  getOne: baseProcedure
     .input(
       z.object({
         slug: z.string(),
       }),
     )
     .query(async ({ input, ctx }) => {
-      if (!ctx.auth.userId) {
-        throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
-      }
       return await prisma.problem.findUnique({
         where: {
           slug: input.slug,
