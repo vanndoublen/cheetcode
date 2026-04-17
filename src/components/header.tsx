@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export const Header = () => {
     return (
-        <header className="h-14 w-full sticky border-b top-0 z-100 backdrop-blur-md transition-all duration-200">
+        <header className="h-14 w-full sticky border-b top-0 z-40 backdrop-blur-md transition-all duration-200">
             <div className="bg-transparent h-full flex items-center justify-between px-24">
                 <Link href="/">
                     <Image src="/logo.svg" alt="Cheetcode" height={32} width={32} />

@@ -142,6 +142,7 @@ export const problemsRouter = createTRPCRouter({
           examples: true,
           hints: true,
           followUps: true,
+          snippets: true,
         },
       });
     }),
