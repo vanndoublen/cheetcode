@@ -89,6 +89,7 @@ model TestCase {
   id        String  @id @default(uuid())
   problemId String
   input     String
+  stdin     String?
   expected  String
   isHidden  Boolean @default(true)
   order     Int
