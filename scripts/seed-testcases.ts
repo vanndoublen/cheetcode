@@ -41,6 +41,14 @@ async function main() {
         continue;
       }
 
+      await prisma.problem.update({
+        where: { id: problemId },
+        data: {
+          entryPoint: (row.entry_point as string) ?? null,
+          pythonPrompt: (row.prompt as string) ?? null,
+        },
+      });
+
       let inputOutput: { input: string; output: string }[] = [];
       try {
         inputOutput =

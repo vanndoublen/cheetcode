@@ -38,6 +38,7 @@ export type TestCaseMinAggregateOutputType = {
   id: string | null
   problemId: string | null
   input: string | null
+  stdin: string | null
   expected: string | null
   isHidden: boolean | null
   order: number | null
@@ -47,6 +48,7 @@ export type TestCaseMaxAggregateOutputType = {
   id: string | null
   problemId: string | null
   input: string | null
+  stdin: string | null
   expected: string | null
   isHidden: boolean | null
   order: number | null
@@ -56,6 +58,7 @@ export type TestCaseCountAggregateOutputType = {
   id: number
   problemId: number
   input: number
+  stdin: number
   expected: number
   isHidden: number
   order: number
@@ -75,6 +78,7 @@ export type TestCaseMinAggregateInputType = {
   id?: true
   problemId?: true
   input?: true
+  stdin?: true
   expected?: true
   isHidden?: true
   order?: true
@@ -84,6 +88,7 @@ export type TestCaseMaxAggregateInputType = {
   id?: true
   problemId?: true
   input?: true
+  stdin?: true
   expected?: true
   isHidden?: true
   order?: true
@@ -93,6 +98,7 @@ export type TestCaseCountAggregateInputType = {
   id?: true
   problemId?: true
   input?: true
+  stdin?: true
   expected?: true
   isHidden?: true
   order?: true
@@ -189,6 +195,7 @@ export type TestCaseGroupByOutputType = {
   id: string
   problemId: string
   input: string
+  stdin: string | null
   expected: string
   isHidden: boolean
   order: number
@@ -221,6 +228,7 @@ export type TestCaseWhereInput = {
   id?: Prisma.StringFilter<"TestCase"> | string
   problemId?: Prisma.StringFilter<"TestCase"> | string
   input?: Prisma.StringFilter<"TestCase"> | string
+  stdin?: Prisma.StringNullableFilter<"TestCase"> | string | null
   expected?: Prisma.StringFilter<"TestCase"> | string
   isHidden?: Prisma.BoolFilter<"TestCase"> | boolean
   order?: Prisma.IntFilter<"TestCase"> | number
@@ -232,6 +240,7 @@ export type TestCaseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   problemId?: Prisma.SortOrder
   input?: Prisma.SortOrder
+  stdin?: Prisma.SortOrderInput | Prisma.SortOrder
   expected?: Prisma.SortOrder
   isHidden?: Prisma.SortOrder
   order?: Prisma.SortOrder
@@ -247,6 +256,7 @@ export type TestCaseWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TestCaseWhereInput | Prisma.TestCaseWhereInput[]
   problemId?: Prisma.StringFilter<"TestCase"> | string
   input?: Prisma.StringFilter<"TestCase"> | string
+  stdin?: Prisma.StringNullableFilter<"TestCase"> | string | null
   expected?: Prisma.StringFilter<"TestCase"> | string
   isHidden?: Prisma.BoolFilter<"TestCase"> | boolean
   order?: Prisma.IntFilter<"TestCase"> | number
@@ -258,6 +268,7 @@ export type TestCaseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   problemId?: Prisma.SortOrder
   input?: Prisma.SortOrder
+  stdin?: Prisma.SortOrderInput | Prisma.SortOrder
   expected?: Prisma.SortOrder
   isHidden?: Prisma.SortOrder
   order?: Prisma.SortOrder
@@ -275,6 +286,7 @@ export type TestCaseScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"TestCase"> | string
   problemId?: Prisma.StringWithAggregatesFilter<"TestCase"> | string
   input?: Prisma.StringWithAggregatesFilter<"TestCase"> | string
+  stdin?: Prisma.StringNullableWithAggregatesFilter<"TestCase"> | string | null
   expected?: Prisma.StringWithAggregatesFilter<"TestCase"> | string
   isHidden?: Prisma.BoolWithAggregatesFilter<"TestCase"> | boolean
   order?: Prisma.IntWithAggregatesFilter<"TestCase"> | number
@@ -283,6 +295,7 @@ export type TestCaseScalarWhereWithAggregatesInput = {
 export type TestCaseCreateInput = {
   id?: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -294,6 +307,7 @@ export type TestCaseUncheckedCreateInput = {
   id?: string
   problemId: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -303,6 +317,7 @@ export type TestCaseUncheckedCreateInput = {
 export type TestCaseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -314,6 +329,7 @@ export type TestCaseUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   problemId?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -324,6 +340,7 @@ export type TestCaseCreateManyInput = {
   id?: string
   problemId: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -332,6 +349,7 @@ export type TestCaseCreateManyInput = {
 export type TestCaseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -341,6 +359,7 @@ export type TestCaseUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   problemId?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -365,6 +384,7 @@ export type TestCaseCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   problemId?: Prisma.SortOrder
   input?: Prisma.SortOrder
+  stdin?: Prisma.SortOrder
   expected?: Prisma.SortOrder
   isHidden?: Prisma.SortOrder
   order?: Prisma.SortOrder
@@ -378,6 +398,7 @@ export type TestCaseMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   problemId?: Prisma.SortOrder
   input?: Prisma.SortOrder
+  stdin?: Prisma.SortOrder
   expected?: Prisma.SortOrder
   isHidden?: Prisma.SortOrder
   order?: Prisma.SortOrder
@@ -387,6 +408,7 @@ export type TestCaseMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   problemId?: Prisma.SortOrder
   input?: Prisma.SortOrder
+  stdin?: Prisma.SortOrder
   expected?: Prisma.SortOrder
   isHidden?: Prisma.SortOrder
   order?: Prisma.SortOrder
@@ -460,6 +482,7 @@ export type TestCaseUpdateOneRequiredWithoutSubmissionResultsNestedInput = {
 export type TestCaseCreateWithoutProblemInput = {
   id?: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -469,6 +492,7 @@ export type TestCaseCreateWithoutProblemInput = {
 export type TestCaseUncheckedCreateWithoutProblemInput = {
   id?: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -508,6 +532,7 @@ export type TestCaseScalarWhereInput = {
   id?: Prisma.StringFilter<"TestCase"> | string
   problemId?: Prisma.StringFilter<"TestCase"> | string
   input?: Prisma.StringFilter<"TestCase"> | string
+  stdin?: Prisma.StringNullableFilter<"TestCase"> | string | null
   expected?: Prisma.StringFilter<"TestCase"> | string
   isHidden?: Prisma.BoolFilter<"TestCase"> | boolean
   order?: Prisma.IntFilter<"TestCase"> | number
@@ -516,6 +541,7 @@ export type TestCaseScalarWhereInput = {
 export type TestCaseCreateWithoutSubmissionResultsInput = {
   id?: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -526,6 +552,7 @@ export type TestCaseUncheckedCreateWithoutSubmissionResultsInput = {
   id?: string
   problemId: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -550,6 +577,7 @@ export type TestCaseUpdateToOneWithWhereWithoutSubmissionResultsInput = {
 export type TestCaseUpdateWithoutSubmissionResultsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -560,6 +588,7 @@ export type TestCaseUncheckedUpdateWithoutSubmissionResultsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   problemId?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -568,6 +597,7 @@ export type TestCaseUncheckedUpdateWithoutSubmissionResultsInput = {
 export type TestCaseCreateManyProblemInput = {
   id?: string
   input: string
+  stdin?: string | null
   expected: string
   isHidden?: boolean
   order: number
@@ -576,6 +606,7 @@ export type TestCaseCreateManyProblemInput = {
 export type TestCaseUpdateWithoutProblemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -585,6 +616,7 @@ export type TestCaseUpdateWithoutProblemInput = {
 export type TestCaseUncheckedUpdateWithoutProblemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -594,6 +626,7 @@ export type TestCaseUncheckedUpdateWithoutProblemInput = {
 export type TestCaseUncheckedUpdateManyWithoutProblemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   input?: Prisma.StringFieldUpdateOperationsInput | string
+  stdin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expected?: Prisma.StringFieldUpdateOperationsInput | string
   isHidden?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -634,6 +667,7 @@ export type TestCaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   problemId?: boolean
   input?: boolean
+  stdin?: boolean
   expected?: boolean
   isHidden?: boolean
   order?: boolean
@@ -646,6 +680,7 @@ export type TestCaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   problemId?: boolean
   input?: boolean
+  stdin?: boolean
   expected?: boolean
   isHidden?: boolean
   order?: boolean
@@ -656,6 +691,7 @@ export type TestCaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   problemId?: boolean
   input?: boolean
+  stdin?: boolean
   expected?: boolean
   isHidden?: boolean
   order?: boolean
@@ -666,12 +702,13 @@ export type TestCaseSelectScalar = {
   id?: boolean
   problemId?: boolean
   input?: boolean
+  stdin?: boolean
   expected?: boolean
   isHidden?: boolean
   order?: boolean
 }
 
-export type TestCaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "problemId" | "input" | "expected" | "isHidden" | "order", ExtArgs["result"]["testCase"]>
+export type TestCaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "problemId" | "input" | "stdin" | "expected" | "isHidden" | "order", ExtArgs["result"]["testCase"]>
 export type TestCaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   problem?: boolean | Prisma.ProblemDefaultArgs<ExtArgs>
   submissionResults?: boolean | Prisma.TestCase$submissionResultsArgs<ExtArgs>
@@ -694,6 +731,7 @@ export type $TestCasePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     problemId: string
     input: string
+    stdin: string | null
     expected: string
     isHidden: boolean
     order: number
@@ -1125,6 +1163,7 @@ export interface TestCaseFieldRefs {
   readonly id: Prisma.FieldRef<"TestCase", 'String'>
   readonly problemId: Prisma.FieldRef<"TestCase", 'String'>
   readonly input: Prisma.FieldRef<"TestCase", 'String'>
+  readonly stdin: Prisma.FieldRef<"TestCase", 'String'>
   readonly expected: Prisma.FieldRef<"TestCase", 'String'>
   readonly isHidden: Prisma.FieldRef<"TestCase", 'Boolean'>
   readonly order: Prisma.FieldRef<"TestCase", 'Int'>

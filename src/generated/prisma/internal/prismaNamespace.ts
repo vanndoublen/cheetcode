@@ -1436,6 +1436,8 @@ export const ProblemScalarFieldEnum = {
   description: 'description',
   constraints: 'constraints',
   solution: 'solution',
+  entryPoint: 'entryPoint',
+  pythonPrompt: 'pythonPrompt',
   externalId: 'externalId',
   frontendId: 'frontendId',
   timeLimitMs: 'timeLimitMs',
@@ -1478,6 +1480,7 @@ export const TestCaseScalarFieldEnum = {
   id: 'id',
   problemId: 'problemId',
   input: 'input',
+  stdin: 'stdin',
   expected: 'expected',
   isHidden: 'isHidden',
   order: 'order'

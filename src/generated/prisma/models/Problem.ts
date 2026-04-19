@@ -44,6 +44,8 @@ export type ProblemMinAggregateOutputType = {
   description: string | null
   constraints: string | null
   solution: string | null
+  entryPoint: string | null
+  pythonPrompt: string | null
   externalId: string | null
   frontendId: string | null
   timeLimitMs: number | null
@@ -63,6 +65,8 @@ export type ProblemMaxAggregateOutputType = {
   description: string | null
   constraints: string | null
   solution: string | null
+  entryPoint: string | null
+  pythonPrompt: string | null
   externalId: string | null
   frontendId: string | null
   timeLimitMs: number | null
@@ -82,6 +86,8 @@ export type ProblemCountAggregateOutputType = {
   description: number
   constraints: number
   solution: number
+  entryPoint: number
+  pythonPrompt: number
   externalId: number
   frontendId: number
   timeLimitMs: number
@@ -113,6 +119,8 @@ export type ProblemMinAggregateInputType = {
   description?: true
   constraints?: true
   solution?: true
+  entryPoint?: true
+  pythonPrompt?: true
   externalId?: true
   frontendId?: true
   timeLimitMs?: true
@@ -132,6 +140,8 @@ export type ProblemMaxAggregateInputType = {
   description?: true
   constraints?: true
   solution?: true
+  entryPoint?: true
+  pythonPrompt?: true
   externalId?: true
   frontendId?: true
   timeLimitMs?: true
@@ -151,6 +161,8 @@ export type ProblemCountAggregateInputType = {
   description?: true
   constraints?: true
   solution?: true
+  entryPoint?: true
+  pythonPrompt?: true
   externalId?: true
   frontendId?: true
   timeLimitMs?: true
@@ -257,6 +269,8 @@ export type ProblemGroupByOutputType = {
   description: string
   constraints: string | null
   solution: string | null
+  entryPoint: string | null
+  pythonPrompt: string | null
   externalId: string | null
   frontendId: string | null
   timeLimitMs: number
@@ -299,6 +313,8 @@ export type ProblemWhereInput = {
   description?: Prisma.StringFilter<"Problem"> | string
   constraints?: Prisma.StringNullableFilter<"Problem"> | string | null
   solution?: Prisma.StringNullableFilter<"Problem"> | string | null
+  entryPoint?: Prisma.StringNullableFilter<"Problem"> | string | null
+  pythonPrompt?: Prisma.StringNullableFilter<"Problem"> | string | null
   externalId?: Prisma.StringNullableFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntFilter<"Problem"> | number
@@ -327,6 +343,8 @@ export type ProblemOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   constraints?: Prisma.SortOrderInput | Prisma.SortOrder
   solution?: Prisma.SortOrderInput | Prisma.SortOrder
+  entryPoint?: Prisma.SortOrderInput | Prisma.SortOrder
+  pythonPrompt?: Prisma.SortOrderInput | Prisma.SortOrder
   externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   frontendId?: Prisma.SortOrderInput | Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
@@ -358,6 +376,8 @@ export type ProblemWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Problem"> | string
   constraints?: Prisma.StringNullableFilter<"Problem"> | string | null
   solution?: Prisma.StringNullableFilter<"Problem"> | string | null
+  entryPoint?: Prisma.StringNullableFilter<"Problem"> | string | null
+  pythonPrompt?: Prisma.StringNullableFilter<"Problem"> | string | null
   externalId?: Prisma.StringNullableFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntFilter<"Problem"> | number
@@ -386,6 +406,8 @@ export type ProblemOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   constraints?: Prisma.SortOrderInput | Prisma.SortOrder
   solution?: Prisma.SortOrderInput | Prisma.SortOrder
+  entryPoint?: Prisma.SortOrderInput | Prisma.SortOrder
+  pythonPrompt?: Prisma.SortOrderInput | Prisma.SortOrder
   externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   frontendId?: Prisma.SortOrderInput | Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
@@ -413,6 +435,8 @@ export type ProblemScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"Problem"> | string
   constraints?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   solution?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
+  entryPoint?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
+  pythonPrompt?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   externalId?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntWithAggregatesFilter<"Problem"> | number
@@ -432,6 +456,8 @@ export type ProblemCreateInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -459,6 +485,8 @@ export type ProblemUncheckedCreateInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -486,6 +514,8 @@ export type ProblemUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -513,6 +543,8 @@ export type ProblemUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -540,6 +572,8 @@ export type ProblemCreateManyInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -559,6 +593,8 @@ export type ProblemUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -577,6 +613,8 @@ export type ProblemUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -596,6 +634,8 @@ export type ProblemCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   constraints?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  entryPoint?: Prisma.SortOrder
+  pythonPrompt?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   frontendId?: Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
@@ -620,6 +660,8 @@ export type ProblemMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   constraints?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  entryPoint?: Prisma.SortOrder
+  pythonPrompt?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   frontendId?: Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
@@ -639,6 +681,8 @@ export type ProblemMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   constraints?: Prisma.SortOrder
   solution?: Prisma.SortOrder
+  entryPoint?: Prisma.SortOrder
+  pythonPrompt?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   frontendId?: Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
@@ -852,6 +896,8 @@ export type ProblemCreateWithoutCategoryInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -878,6 +924,8 @@ export type ProblemUncheckedCreateWithoutCategoryInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -933,6 +981,8 @@ export type ProblemScalarWhereInput = {
   description?: Prisma.StringFilter<"Problem"> | string
   constraints?: Prisma.StringNullableFilter<"Problem"> | string | null
   solution?: Prisma.StringNullableFilter<"Problem"> | string | null
+  entryPoint?: Prisma.StringNullableFilter<"Problem"> | string | null
+  pythonPrompt?: Prisma.StringNullableFilter<"Problem"> | string | null
   externalId?: Prisma.StringNullableFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntFilter<"Problem"> | number
@@ -952,6 +1002,8 @@ export type ProblemCreateWithoutTagsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -978,6 +1030,8 @@ export type ProblemUncheckedCreateWithoutTagsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1020,6 +1074,8 @@ export type ProblemUpdateWithoutTagsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1046,6 +1102,8 @@ export type ProblemUncheckedUpdateWithoutTagsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1072,6 +1130,8 @@ export type ProblemCreateWithoutTestCasesInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1098,6 +1158,8 @@ export type ProblemUncheckedCreateWithoutTestCasesInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1140,6 +1202,8 @@ export type ProblemUpdateWithoutTestCasesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1166,6 +1230,8 @@ export type ProblemUncheckedUpdateWithoutTestCasesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1192,6 +1258,8 @@ export type ProblemCreateWithoutSnippetsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1218,6 +1286,8 @@ export type ProblemUncheckedCreateWithoutSnippetsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1260,6 +1330,8 @@ export type ProblemUpdateWithoutSnippetsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1286,6 +1358,8 @@ export type ProblemUncheckedUpdateWithoutSnippetsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1312,6 +1386,8 @@ export type ProblemCreateWithoutSubmissionsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1338,6 +1414,8 @@ export type ProblemUncheckedCreateWithoutSubmissionsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1380,6 +1458,8 @@ export type ProblemUpdateWithoutSubmissionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1406,6 +1486,8 @@ export type ProblemUncheckedUpdateWithoutSubmissionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1432,6 +1514,8 @@ export type ProblemCreateWithoutUserProblemProgressesInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1458,6 +1542,8 @@ export type ProblemUncheckedCreateWithoutUserProblemProgressesInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1500,6 +1586,8 @@ export type ProblemUpdateWithoutUserProblemProgressesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1526,6 +1614,8 @@ export type ProblemUncheckedUpdateWithoutUserProblemProgressesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1552,6 +1642,8 @@ export type ProblemCreateWithoutExamplesInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1578,6 +1670,8 @@ export type ProblemUncheckedCreateWithoutExamplesInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1620,6 +1714,8 @@ export type ProblemUpdateWithoutExamplesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1646,6 +1742,8 @@ export type ProblemUncheckedUpdateWithoutExamplesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1672,6 +1770,8 @@ export type ProblemCreateWithoutHintsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1698,6 +1798,8 @@ export type ProblemUncheckedCreateWithoutHintsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1740,6 +1842,8 @@ export type ProblemUpdateWithoutHintsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1766,6 +1870,8 @@ export type ProblemUncheckedUpdateWithoutHintsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1792,6 +1898,8 @@ export type ProblemCreateWithoutFollowUpsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1818,6 +1926,8 @@ export type ProblemUncheckedCreateWithoutFollowUpsInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1860,6 +1970,8 @@ export type ProblemUpdateWithoutFollowUpsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1886,6 +1998,8 @@ export type ProblemUncheckedUpdateWithoutFollowUpsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1912,6 +2026,8 @@ export type ProblemCreateManyCategoryInput = {
   description: string
   constraints?: string | null
   solution?: string | null
+  entryPoint?: string | null
+  pythonPrompt?: string | null
   externalId?: string | null
   frontendId?: string | null
   timeLimitMs?: number
@@ -1930,6 +2046,8 @@ export type ProblemUpdateWithoutCategoryInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1956,6 +2074,8 @@ export type ProblemUncheckedUpdateWithoutCategoryInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1982,6 +2102,8 @@ export type ProblemUncheckedUpdateManyWithoutCategoryInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pythonPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2094,6 +2216,8 @@ export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   constraints?: boolean
   solution?: boolean
+  entryPoint?: boolean
+  pythonPrompt?: boolean
   externalId?: boolean
   frontendId?: boolean
   timeLimitMs?: boolean
@@ -2123,6 +2247,8 @@ export type ProblemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   constraints?: boolean
   solution?: boolean
+  entryPoint?: boolean
+  pythonPrompt?: boolean
   externalId?: boolean
   frontendId?: boolean
   timeLimitMs?: boolean
@@ -2143,6 +2269,8 @@ export type ProblemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   constraints?: boolean
   solution?: boolean
+  entryPoint?: boolean
+  pythonPrompt?: boolean
   externalId?: boolean
   frontendId?: boolean
   timeLimitMs?: boolean
@@ -2163,6 +2291,8 @@ export type ProblemSelectScalar = {
   description?: boolean
   constraints?: boolean
   solution?: boolean
+  entryPoint?: boolean
+  pythonPrompt?: boolean
   externalId?: boolean
   frontendId?: boolean
   timeLimitMs?: boolean
@@ -2174,7 +2304,7 @@ export type ProblemSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProblemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "difficulty" | "description" | "constraints" | "solution" | "externalId" | "frontendId" | "timeLimitMs" | "memoryLimitKb" | "isPublished" | "isPremium" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+export type ProblemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "difficulty" | "description" | "constraints" | "solution" | "entryPoint" | "pythonPrompt" | "externalId" | "frontendId" | "timeLimitMs" | "memoryLimitKb" | "isPublished" | "isPremium" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
 export type ProblemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.Problem$categoryArgs<ExtArgs>
   testCases?: boolean | Prisma.Problem$testCasesArgs<ExtArgs>
@@ -2215,6 +2345,8 @@ export type $ProblemPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string
     constraints: string | null
     solution: string | null
+    entryPoint: string | null
+    pythonPrompt: string | null
     externalId: string | null
     frontendId: string | null
     timeLimitMs: number
@@ -2663,6 +2795,8 @@ export interface ProblemFieldRefs {
   readonly description: Prisma.FieldRef<"Problem", 'String'>
   readonly constraints: Prisma.FieldRef<"Problem", 'String'>
   readonly solution: Prisma.FieldRef<"Problem", 'String'>
+  readonly entryPoint: Prisma.FieldRef<"Problem", 'String'>
+  readonly pythonPrompt: Prisma.FieldRef<"Problem", 'String'>
   readonly externalId: Prisma.FieldRef<"Problem", 'String'>
   readonly frontendId: Prisma.FieldRef<"Problem", 'String'>
   readonly timeLimitMs: Prisma.FieldRef<"Problem", 'Int'>

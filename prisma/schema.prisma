@@ -32,6 +32,9 @@ model Problem {
   constraints String?
   solution    String?
 
+  entryPoint    String?
+  pythonPrompt  String?
+
   externalId String?
   frontendId String?
 
