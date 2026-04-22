@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Monokai from "../../../../../node_modules/monaco-themes/themes/Monokai.json";
 import dynamic from "next/dynamic";
 import { type Monaco } from "@monaco-editor/react";
-import type { editor } from "monaco-editor";
+import { languages, type editor } from "monaco-editor";
 import { useTheme } from "next-themes";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useProblemWorkspace } from "../../hooks/use-problems";
@@ -72,22 +72,25 @@ const LANGUAGE_MAP: Record<Language, string> = {
 };
 
 export const EditorPanel = ({ slug }: { slug: string }) => {
-    const [code, setCode] = useState(DEFAULT_TEMPLATE);
     const monacoRef = useRef<Monaco | null>(null);
     const { theme } = useTheme();
 
     const { data } = useProblemWorkspace(slug);
-    const snippets = data?.snippets ?? [];
 
+    const snippets = data?.snippets ?? [];
     const [selectedLanguage, setSelectedLanguage] = useState<Language>(
         snippets[0]?.language ?? "PYTHON3"
     );
 
+    const snippet = snippets.find(s => s.language == selectedLanguage);
+
+    const [code, setCode] = useState(snippet?.template || DEFAULT_TEMPLATE);
+    
     const trpc = useTRPC();
     const submissionsMutate = useMutation(trpc.submissions.submit.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
-                console.log(data); 
+                console.log(data);
             },
         }
     ));
@@ -95,12 +98,12 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const handleSubmit = async (
         problemSlug: string,
         sourceCode: string,
-        language: string, 
-        isHidden: false, 
+        language: string,
+        isHidden: false,
     ) => {
         await submissionsMutate.mutateAsync({
             problemSlug,
-            sourceCode, 
+            sourceCode,
             language,
             isHidden,
         })

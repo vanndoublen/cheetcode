@@ -10,7 +10,7 @@ import {
 
 export const InfoPanel = ({ slug }: { slug: string }) => {
     return (
-        <Tabs defaultValue="solution" className="w-full h-full flex flex-col">
+        <Tabs defaultValue="description" className="w-full h-full flex flex-col">
 
             <TabsList className="sticky top-0 z-10 w-full h-12 bg-background/80 backdrop-blur-md rounded-none border-b p-1">
                 <TabsTrigger value="description">Description</TabsTrigger>
@@ -119,7 +119,7 @@ const DescriptionTab = ({ slug }: { slug: string }) => {
         followUpsMarkdown,
         hintsMarkdown
     ].filter(Boolean).join("\n\n---\n\n"); // Adds a nice Leetcode-style divider line between sections!
-    console.log(finalMarkdown)
+    
     return (
         <div className="flex flex-col gap-y-4">
             <h1 className="font-semibold text-lg">{data.title}</h1>
