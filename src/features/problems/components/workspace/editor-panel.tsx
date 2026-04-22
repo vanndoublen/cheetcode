@@ -9,6 +9,10 @@ import { useTheme } from "next-themes";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useProblemWorkspace } from "../../hooks/use-problems";
 import { Language } from "@/generated/prisma/enums";
+import { Button } from "@/components/ui/button";
+import { useTRPC } from "@/trpc/client";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -67,7 +71,7 @@ const LANGUAGE_MAP: Record<Language, string> = {
     PYTHONDATA: "python",
 };
 
-export const EditorPanel = ({slug}: {slug: string}) => {
+export const EditorPanel = ({ slug }: { slug: string }) => {
     const [code, setCode] = useState(DEFAULT_TEMPLATE);
     const monacoRef = useRef<Monaco | null>(null);
     const { theme } = useTheme();
@@ -79,6 +83,29 @@ export const EditorPanel = ({slug}: {slug: string}) => {
         snippets[0]?.language ?? "PYTHON3"
     );
 
+    const trpc = useTRPC();
+    const submissionsMutate = useMutation(trpc.submissions.submit.mutationOptions(
+        {
+            onSuccess(data, variables, onMutateResult, context) {
+                console.log(data); 
+            },
+        }
+    ));
+
+    const handleSubmit = async (
+        problemSlug: string,
+        sourceCode: string,
+        language: string, 
+        isHidden: false, 
+    ) => {
+        await submissionsMutate.mutateAsync({
+            problemSlug,
+            sourceCode, 
+            language,
+            isHidden,
+        })
+    }
+
 
     const handleEditorMount = (
         editor: editor.IStandaloneCodeEditor,
@@ -87,15 +114,14 @@ export const EditorPanel = ({slug}: {slug: string}) => {
         monacoRef.current = monaco;
         const bg = cssVarToHex("--background");
         const line = cssVarToHex("--secondary-foreground");
-        const lineBg = cssVarToHex("--muted")
-        console.log(bg);
+        const lineBg = cssVarToHex("--background");
 
         monaco.editor.defineTheme("monokai", {
             ...Monokai,
             colors: {
                 ...Monokai.colors,
                 "editor.background": bg,
-                "editorLineNumber.foreground": line,
+                // "editorLineNumber.foreground": line,
                 "editor.lineHighlightBackground": lineBg
             }
         });
@@ -108,9 +134,9 @@ export const EditorPanel = ({slug}: {slug: string}) => {
 
     const handleLanguageChange = (lang: Language) => {
         setSelectedLanguage(lang);
-        const snippet = snippets.find(s => s.language == lang); 
-        setCode(snippet?.template ?? "");   
-        
+        const snippet = snippets.find(s => s.language == lang);
+        setCode(snippet?.template ?? "");
+
     }
 
     useEffect(() => {
@@ -127,7 +153,7 @@ export const EditorPanel = ({slug}: {slug: string}) => {
     return (
 
         <div className="flex flex-col h-full">
-            <div className="flex items-center px-3 py-2 border-b">
+            <div className="flex items-center justify-between px-3 py-2 border-b">
                 <Select value={selectedLanguage} onValueChange={(val) => handleLanguageChange(val as Language)}>
                     <SelectTrigger className="w-36 h-7 text-xs">
                         <SelectValue />
@@ -140,27 +166,33 @@ export const EditorPanel = ({slug}: {slug: string}) => {
                         ))}
                     </SelectContent>
                 </Select>
+
+                <Button
+                    onClick={() => handleSubmit(slug, code, selectedLanguage, false)}
+                >
+                    Submit
+                </Button>
             </div>
             <div className=" flex-1 border-b  overflow-hidden">
-            <Editor
-                height="50vh"
-                defaultLanguage="c"
-                value={code}
-                defaultValue={code}
-                language={LANGUAGE_MAP[selectedLanguage] ?? "plaintext"}
-                onChange={(value) => setCode(value ?? "")}
-                onMount={handleEditorMount}
-                options={{
-                    minimap: { enabled: false },
-                    fontSize: 14,
-                    fontFamily: "Geist Mono",
-                    fontWeight: "500",
-                    wordWrap: "on",
-                    cursorBlinking: "smooth",
-                    cursorStyle: "line"
-                }}
-            />
-        </div>
+                <Editor
+                    height="50vh"
+                    defaultLanguage="c"
+                    value={code}
+                    defaultValue={code}
+                    language={LANGUAGE_MAP[selectedLanguage] ?? "plaintext"}
+                    onChange={(value) => setCode(value ?? "")}
+                    onMount={handleEditorMount}
+                    options={{
+                        minimap: { enabled: false },
+                        fontSize: 14,
+                        fontFamily: "Geist Mono",
+                        fontWeight: "500",
+                        wordWrap: "on",
+                        cursorBlinking: "smooth",
+                        cursorStyle: "line"
+                    }}
+                />
+            </div>
         </div>
     );
 };

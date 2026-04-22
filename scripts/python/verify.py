@@ -19,6 +19,18 @@ for input_, stdin, expected in rows:
     print("STDIN:   ", stdin)
     print("EXPECTED:", expected)
     print("---")
+    
+    # verify.py - add this query
+cur.execute('''
+    SELECT slug, "entryPoint", "pythonPrompt" 
+    FROM "Problem" 
+    WHERE slug = 'two-sum'
+''')
+
+row = cur.fetchone()
+print("SLUG:", row[0])
+print("ENTRY POINT:", row[1])
+print("PYTHON PROMPT (first 200 chars):", row[2][:200] if row[2] else None)
 
 cur.close()
 conn.close()
