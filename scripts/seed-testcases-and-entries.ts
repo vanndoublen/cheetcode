@@ -6,12 +6,21 @@ const DATASET = "newfacade/LeetCodeDataset";
 const SPLIT = "train";
 const BATCH_SIZE = 100;
 
-async function fetchRows(offset: number, length: number) {
+async function fetchRows(offset: number, length: number, retries = 3) {
   const url = `${HF_API}?dataset=${DATASET}&config=default&split=${SPLIT}&offset=${offset}&length=${length}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HF API error: ${res.status}`);
-  const json = await res.json();
-  return json.rows as { row: Record<string, any> }[];
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HF API error: ${res.status}`);
+      const json = await res.json();
+      return json.rows as { row: Record<string, any> }[];
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      console.log(`Retry ${i + 1}/${retries} after error...`);
+      await new Promise((r) => setTimeout(r, 2000 * (i + 1)));
+    }
+  }
+  return [];
 }
 
 async function main() {
@@ -41,11 +50,11 @@ async function main() {
         continue;
       }
 
+      // update entryPoint on problem
       await prisma.problem.update({
         where: { id: problemId },
         data: {
           entryPoint: (row.entry_point as string) ?? null,
-          pythonPrompt: (row.prompt as string) ?? null,
         },
       });
 
@@ -65,10 +74,8 @@ async function main() {
         continue;
       }
 
-      // delete existing test cases for this problem first
-      await prisma.testCase.deleteMany({
-        where: { problemId },
-      });
+      // replace existing test cases
+      await prisma.testCase.deleteMany({ where: { problemId } });
 
       await prisma.testCase.createMany({
         data: inputOutput

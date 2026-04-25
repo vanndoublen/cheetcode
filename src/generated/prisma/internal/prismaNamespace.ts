@@ -391,6 +391,7 @@ export const ModelName = {
   ProblemTag: 'ProblemTag',
   TestCase: 'TestCase',
   CodeSnippet: 'CodeSnippet',
+  LanguageConfig: 'LanguageConfig',
   Submission: 'Submission',
   SubmissionResult: 'SubmissionResult',
   UserProblemProgress: 'UserProblemProgress',
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "problem" | "category" | "tag" | "problemTag" | "testCase" | "codeSnippet" | "submission" | "submissionResult" | "userProblemProgress" | "example" | "hint" | "followUp"
+    modelProps: "user" | "problem" | "category" | "tag" | "problemTag" | "testCase" | "codeSnippet" | "languageConfig" | "submission" | "submissionResult" | "userProblemProgress" | "example" | "hint" | "followUp"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -934,6 +935,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LanguageConfig: {
+      payload: Prisma.$LanguageConfigPayload<ExtArgs>
+      fields: Prisma.LanguageConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LanguageConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LanguageConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.LanguageConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LanguageConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>
+        }
+        findMany: {
+          args: Prisma.LanguageConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>[]
+        }
+        create: {
+          args: Prisma.LanguageConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>
+        }
+        createMany: {
+          args: Prisma.LanguageConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LanguageConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.LanguageConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>
+        }
+        update: {
+          args: Prisma.LanguageConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.LanguageConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LanguageConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LanguageConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.LanguageConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LanguageConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.LanguageConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLanguageConfig>
+        }
+        groupBy: {
+          args: Prisma.LanguageConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LanguageConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LanguageConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LanguageConfigCountAggregateOutputType> | number
+        }
+      }
+    }
     Submission: {
       payload: Prisma.$SubmissionPayload<ExtArgs>
       fields: Prisma.SubmissionFieldRefs
@@ -1437,9 +1512,11 @@ export const ProblemScalarFieldEnum = {
   constraints: 'constraints',
   solution: 'solution',
   entryPoint: 'entryPoint',
-  pythonPrompt: 'pythonPrompt',
+  inputSignature: 'inputSignature',
+  outputSignature: 'outputSignature',
   externalId: 'externalId',
   frontendId: 'frontendId',
+  canSubmit: 'canSubmit',
   timeLimitMs: 'timeLimitMs',
   memoryLimitKb: 'memoryLimitKb',
   isPublished: 'isPublished',
@@ -1493,10 +1570,22 @@ export const CodeSnippetScalarFieldEnum = {
   id: 'id',
   problemId: 'problemId',
   language: 'language',
-  template: 'template'
+  template: 'template',
+  driverOverride: 'driverOverride',
+  entryPoint: 'entryPoint'
 } as const
 
 export type CodeSnippetScalarFieldEnum = (typeof CodeSnippetScalarFieldEnum)[keyof typeof CodeSnippetScalarFieldEnum]
+
+
+export const LanguageConfigScalarFieldEnum = {
+  language: 'language',
+  prompt: 'prompt',
+  driver: 'driver',
+  judge0Id: 'judge0Id'
+} as const
+
+export type LanguageConfigScalarFieldEnum = (typeof LanguageConfigScalarFieldEnum)[keyof typeof LanguageConfigScalarFieldEnum]
 
 
 export const SubmissionScalarFieldEnum = {
@@ -1659,6 +1748,13 @@ export type ListEnumDifficultyFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1669,13 +1765,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1836,6 +1925,7 @@ export type GlobalOmitConfig = {
   problemTag?: Prisma.ProblemTagOmit
   testCase?: Prisma.TestCaseOmit
   codeSnippet?: Prisma.CodeSnippetOmit
+  languageConfig?: Prisma.LanguageConfigOmit
   submission?: Prisma.SubmissionOmit
   submissionResult?: Prisma.SubmissionResultOmit
   userProblemProgress?: Prisma.UserProblemProgressOmit

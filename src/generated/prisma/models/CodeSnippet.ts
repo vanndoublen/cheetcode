@@ -29,6 +29,8 @@ export type CodeSnippetMinAggregateOutputType = {
   problemId: string | null
   language: $Enums.Language | null
   template: string | null
+  driverOverride: string | null
+  entryPoint: string | null
 }
 
 export type CodeSnippetMaxAggregateOutputType = {
@@ -36,6 +38,8 @@ export type CodeSnippetMaxAggregateOutputType = {
   problemId: string | null
   language: $Enums.Language | null
   template: string | null
+  driverOverride: string | null
+  entryPoint: string | null
 }
 
 export type CodeSnippetCountAggregateOutputType = {
@@ -43,6 +47,8 @@ export type CodeSnippetCountAggregateOutputType = {
   problemId: number
   language: number
   template: number
+  driverOverride: number
+  entryPoint: number
   _all: number
 }
 
@@ -52,6 +58,8 @@ export type CodeSnippetMinAggregateInputType = {
   problemId?: true
   language?: true
   template?: true
+  driverOverride?: true
+  entryPoint?: true
 }
 
 export type CodeSnippetMaxAggregateInputType = {
@@ -59,6 +67,8 @@ export type CodeSnippetMaxAggregateInputType = {
   problemId?: true
   language?: true
   template?: true
+  driverOverride?: true
+  entryPoint?: true
 }
 
 export type CodeSnippetCountAggregateInputType = {
@@ -66,6 +76,8 @@ export type CodeSnippetCountAggregateInputType = {
   problemId?: true
   language?: true
   template?: true
+  driverOverride?: true
+  entryPoint?: true
   _all?: true
 }
 
@@ -146,6 +158,8 @@ export type CodeSnippetGroupByOutputType = {
   problemId: string
   language: $Enums.Language
   template: string
+  driverOverride: string | null
+  entryPoint: string | null
   _count: CodeSnippetCountAggregateOutputType | null
   _min: CodeSnippetMinAggregateOutputType | null
   _max: CodeSnippetMaxAggregateOutputType | null
@@ -174,6 +188,8 @@ export type CodeSnippetWhereInput = {
   problemId?: Prisma.StringFilter<"CodeSnippet"> | string
   language?: Prisma.EnumLanguageFilter<"CodeSnippet"> | $Enums.Language
   template?: Prisma.StringFilter<"CodeSnippet"> | string
+  driverOverride?: Prisma.StringNullableFilter<"CodeSnippet"> | string | null
+  entryPoint?: Prisma.StringNullableFilter<"CodeSnippet"> | string | null
   problem?: Prisma.XOR<Prisma.ProblemScalarRelationFilter, Prisma.ProblemWhereInput>
 }
 
@@ -182,6 +198,8 @@ export type CodeSnippetOrderByWithRelationInput = {
   problemId?: Prisma.SortOrder
   language?: Prisma.SortOrder
   template?: Prisma.SortOrder
+  driverOverride?: Prisma.SortOrderInput | Prisma.SortOrder
+  entryPoint?: Prisma.SortOrderInput | Prisma.SortOrder
   problem?: Prisma.ProblemOrderByWithRelationInput
 }
 
@@ -194,6 +212,8 @@ export type CodeSnippetWhereUniqueInput = Prisma.AtLeast<{
   problemId?: Prisma.StringFilter<"CodeSnippet"> | string
   language?: Prisma.EnumLanguageFilter<"CodeSnippet"> | $Enums.Language
   template?: Prisma.StringFilter<"CodeSnippet"> | string
+  driverOverride?: Prisma.StringNullableFilter<"CodeSnippet"> | string | null
+  entryPoint?: Prisma.StringNullableFilter<"CodeSnippet"> | string | null
   problem?: Prisma.XOR<Prisma.ProblemScalarRelationFilter, Prisma.ProblemWhereInput>
 }, "id" | "problemId_language">
 
@@ -202,6 +222,8 @@ export type CodeSnippetOrderByWithAggregationInput = {
   problemId?: Prisma.SortOrder
   language?: Prisma.SortOrder
   template?: Prisma.SortOrder
+  driverOverride?: Prisma.SortOrderInput | Prisma.SortOrder
+  entryPoint?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CodeSnippetCountOrderByAggregateInput
   _max?: Prisma.CodeSnippetMaxOrderByAggregateInput
   _min?: Prisma.CodeSnippetMinOrderByAggregateInput
@@ -215,12 +237,16 @@ export type CodeSnippetScalarWhereWithAggregatesInput = {
   problemId?: Prisma.StringWithAggregatesFilter<"CodeSnippet"> | string
   language?: Prisma.EnumLanguageWithAggregatesFilter<"CodeSnippet"> | $Enums.Language
   template?: Prisma.StringWithAggregatesFilter<"CodeSnippet"> | string
+  driverOverride?: Prisma.StringNullableWithAggregatesFilter<"CodeSnippet"> | string | null
+  entryPoint?: Prisma.StringNullableWithAggregatesFilter<"CodeSnippet"> | string | null
 }
 
 export type CodeSnippetCreateInput = {
   id?: string
   language: $Enums.Language
   template: string
+  driverOverride?: string | null
+  entryPoint?: string | null
   problem: Prisma.ProblemCreateNestedOneWithoutSnippetsInput
 }
 
@@ -229,12 +255,16 @@ export type CodeSnippetUncheckedCreateInput = {
   problemId: string
   language: $Enums.Language
   template: string
+  driverOverride?: string | null
+  entryPoint?: string | null
 }
 
 export type CodeSnippetUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   problem?: Prisma.ProblemUpdateOneRequiredWithoutSnippetsNestedInput
 }
 
@@ -243,6 +273,8 @@ export type CodeSnippetUncheckedUpdateInput = {
   problemId?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CodeSnippetCreateManyInput = {
@@ -250,12 +282,16 @@ export type CodeSnippetCreateManyInput = {
   problemId: string
   language: $Enums.Language
   template: string
+  driverOverride?: string | null
+  entryPoint?: string | null
 }
 
 export type CodeSnippetUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CodeSnippetUncheckedUpdateManyInput = {
@@ -263,6 +299,8 @@ export type CodeSnippetUncheckedUpdateManyInput = {
   problemId?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CodeSnippetListRelationFilter = {
@@ -285,6 +323,8 @@ export type CodeSnippetCountOrderByAggregateInput = {
   problemId?: Prisma.SortOrder
   language?: Prisma.SortOrder
   template?: Prisma.SortOrder
+  driverOverride?: Prisma.SortOrder
+  entryPoint?: Prisma.SortOrder
 }
 
 export type CodeSnippetMaxOrderByAggregateInput = {
@@ -292,6 +332,8 @@ export type CodeSnippetMaxOrderByAggregateInput = {
   problemId?: Prisma.SortOrder
   language?: Prisma.SortOrder
   template?: Prisma.SortOrder
+  driverOverride?: Prisma.SortOrder
+  entryPoint?: Prisma.SortOrder
 }
 
 export type CodeSnippetMinOrderByAggregateInput = {
@@ -299,6 +341,8 @@ export type CodeSnippetMinOrderByAggregateInput = {
   problemId?: Prisma.SortOrder
   language?: Prisma.SortOrder
   template?: Prisma.SortOrder
+  driverOverride?: Prisma.SortOrder
+  entryPoint?: Prisma.SortOrder
 }
 
 export type CodeSnippetCreateNestedManyWithoutProblemInput = {
@@ -351,12 +395,16 @@ export type CodeSnippetCreateWithoutProblemInput = {
   id?: string
   language: $Enums.Language
   template: string
+  driverOverride?: string | null
+  entryPoint?: string | null
 }
 
 export type CodeSnippetUncheckedCreateWithoutProblemInput = {
   id?: string
   language: $Enums.Language
   template: string
+  driverOverride?: string | null
+  entryPoint?: string | null
 }
 
 export type CodeSnippetCreateOrConnectWithoutProblemInput = {
@@ -393,30 +441,40 @@ export type CodeSnippetScalarWhereInput = {
   problemId?: Prisma.StringFilter<"CodeSnippet"> | string
   language?: Prisma.EnumLanguageFilter<"CodeSnippet"> | $Enums.Language
   template?: Prisma.StringFilter<"CodeSnippet"> | string
+  driverOverride?: Prisma.StringNullableFilter<"CodeSnippet"> | string | null
+  entryPoint?: Prisma.StringNullableFilter<"CodeSnippet"> | string | null
 }
 
 export type CodeSnippetCreateManyProblemInput = {
   id?: string
   language: $Enums.Language
   template: string
+  driverOverride?: string | null
+  entryPoint?: string | null
 }
 
 export type CodeSnippetUpdateWithoutProblemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CodeSnippetUncheckedUpdateWithoutProblemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CodeSnippetUncheckedUpdateManyWithoutProblemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   template?: Prisma.StringFieldUpdateOperationsInput | string
+  driverOverride?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -426,6 +484,8 @@ export type CodeSnippetSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   problemId?: boolean
   language?: boolean
   template?: boolean
+  driverOverride?: boolean
+  entryPoint?: boolean
   problem?: boolean | Prisma.ProblemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["codeSnippet"]>
 
@@ -434,6 +494,8 @@ export type CodeSnippetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   problemId?: boolean
   language?: boolean
   template?: boolean
+  driverOverride?: boolean
+  entryPoint?: boolean
   problem?: boolean | Prisma.ProblemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["codeSnippet"]>
 
@@ -442,6 +504,8 @@ export type CodeSnippetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   problemId?: boolean
   language?: boolean
   template?: boolean
+  driverOverride?: boolean
+  entryPoint?: boolean
   problem?: boolean | Prisma.ProblemDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["codeSnippet"]>
 
@@ -450,9 +514,11 @@ export type CodeSnippetSelectScalar = {
   problemId?: boolean
   language?: boolean
   template?: boolean
+  driverOverride?: boolean
+  entryPoint?: boolean
 }
 
-export type CodeSnippetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "problemId" | "language" | "template", ExtArgs["result"]["codeSnippet"]>
+export type CodeSnippetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "problemId" | "language" | "template" | "driverOverride" | "entryPoint", ExtArgs["result"]["codeSnippet"]>
 export type CodeSnippetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   problem?: boolean | Prisma.ProblemDefaultArgs<ExtArgs>
 }
@@ -473,6 +539,8 @@ export type $CodeSnippetPayload<ExtArgs extends runtime.Types.Extensions.Interna
     problemId: string
     language: $Enums.Language
     template: string
+    driverOverride: string | null
+    entryPoint: string | null
   }, ExtArgs["result"]["codeSnippet"]>
   composites: {}
 }
@@ -901,6 +969,8 @@ export interface CodeSnippetFieldRefs {
   readonly problemId: Prisma.FieldRef<"CodeSnippet", 'String'>
   readonly language: Prisma.FieldRef<"CodeSnippet", 'Language'>
   readonly template: Prisma.FieldRef<"CodeSnippet", 'String'>
+  readonly driverOverride: Prisma.FieldRef<"CodeSnippet", 'String'>
+  readonly entryPoint: Prisma.FieldRef<"CodeSnippet", 'String'>
 }
     
 

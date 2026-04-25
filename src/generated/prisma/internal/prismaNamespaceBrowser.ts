@@ -58,6 +58,7 @@ export const ModelName = {
   ProblemTag: 'ProblemTag',
   TestCase: 'TestCase',
   CodeSnippet: 'CodeSnippet',
+  LanguageConfig: 'LanguageConfig',
   Submission: 'Submission',
   SubmissionResult: 'SubmissionResult',
   UserProblemProgress: 'UserProblemProgress',
@@ -102,9 +103,11 @@ export const ProblemScalarFieldEnum = {
   constraints: 'constraints',
   solution: 'solution',
   entryPoint: 'entryPoint',
-  pythonPrompt: 'pythonPrompt',
+  inputSignature: 'inputSignature',
+  outputSignature: 'outputSignature',
   externalId: 'externalId',
   frontendId: 'frontendId',
+  canSubmit: 'canSubmit',
   timeLimitMs: 'timeLimitMs',
   memoryLimitKb: 'memoryLimitKb',
   isPublished: 'isPublished',
@@ -158,10 +161,22 @@ export const CodeSnippetScalarFieldEnum = {
   id: 'id',
   problemId: 'problemId',
   language: 'language',
-  template: 'template'
+  template: 'template',
+  driverOverride: 'driverOverride',
+  entryPoint: 'entryPoint'
 } as const
 
 export type CodeSnippetScalarFieldEnum = (typeof CodeSnippetScalarFieldEnum)[keyof typeof CodeSnippetScalarFieldEnum]
+
+
+export const LanguageConfigScalarFieldEnum = {
+  language: 'language',
+  prompt: 'prompt',
+  driver: 'driver',
+  judge0Id: 'judge0Id'
+} as const
+
+export type LanguageConfigScalarFieldEnum = (typeof LanguageConfigScalarFieldEnum)[keyof typeof LanguageConfigScalarFieldEnum]
 
 
 export const SubmissionScalarFieldEnum = {

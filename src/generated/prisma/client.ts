@@ -77,6 +77,11 @@ export type TestCase = Prisma.TestCaseModel
  */
 export type CodeSnippet = Prisma.CodeSnippetModel
 /**
+ * Model LanguageConfig
+ * 
+ */
+export type LanguageConfig = Prisma.LanguageConfigModel
+/**
  * Model Submission
  * 
  */

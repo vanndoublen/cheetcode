@@ -32,11 +32,15 @@ model Problem {
   constraints String?
   solution    String?
 
-  entryPoint    String?
-  pythonPrompt  String?
+  entryPoint String?
+
+  inputSignature  String? // e.g. "int[],int"
+  outputSignature String? // e.g. "int[]"
 
   externalId String?
   frontendId String?
+
+  canSubmit Boolean @default(true)
 
   timeLimitMs   Int @default(1000)
   memoryLimitKb Int @default(262144)
@@ -105,14 +109,23 @@ model TestCase {
 }
 
 model CodeSnippet {
-  id        String   @id @default(uuid())
-  problemId String
-  language  Language
-  template  String
+  id             String   @id @default(uuid())
+  problemId      String
+  language       Language
+  template       String
+  driverOverride String?
+  entryPoint String?
 
   problem Problem @relation(fields: [problemId], references: [id])
 
   @@unique([problemId, language])
+}
+
+model LanguageConfig {
+  language Language @id
+  prompt   String
+  driver   String
+  judge0Id Int
 }
 
 model Submission {

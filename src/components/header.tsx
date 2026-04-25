@@ -5,13 +5,15 @@ import Link from "next/link"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import { NavBar } from "./nav-bar"
 import { cn } from "@/lib/utils";
+import { DotSwarm } from "./customs/OrganicLoaders"
 
 export const Header = () => {
     return (
         <header className="h-14 w-full sticky border-b top-0 z-40 backdrop-blur-md transition-all duration-200">
             <div className="bg-transparent h-full flex items-center justify-between px-24">
                 <Link href="/">
-                    <Image src="/logo.svg" alt="Cheetcode" height={32} width={32} />
+                    {/* <Image src="/logo.svg" alt="Cheetcode" height={32} width={32} /> */}
+                    <DotSwarm size={32} color="#ffffff"/>
                 </Link>
 
                 <NavBar />
