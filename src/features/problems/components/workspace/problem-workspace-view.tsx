@@ -5,8 +5,8 @@ import { Allotment } from "allotment";
 import "allotment/dist/style.css"
 
 
-const MIN_SIDEBAR_WIDTH = 200;
-const MAX_SIDEBAR_WIDTH = 400;
+const MIN_SIDEBAR_WIDTH = 600;
+const MAX_SIDEBAR_WIDTH = 800;
 const DEFAULT_CONVERSATION_SIDEBAR_WIDTH = 1000;
 const DEFAULT_MAIN_SIZE = 1000;
 
@@ -25,9 +25,15 @@ export const ProblemWorkspaceView = ({ slug }: { slug: string }) => {
                 >
                     <InfoPanel slug={slug} />
                 </Allotment.Pane>
-
                 <Allotment.Pane>
-                    <EditorPanel slug={slug}/>
+                    <Allotment vertical>
+                        <Allotment.Pane >
+                            <EditorPanel slug={slug} />
+                        </Allotment.Pane>
+                        <Allotment.Pane>
+                            <div className="h-full bg-red-300"></div>
+                        </Allotment.Pane>
+                    </Allotment>
                 </Allotment.Pane>
             </Allotment>
         </div>

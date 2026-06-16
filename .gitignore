@@ -2,6 +2,7 @@
 
 # claude
 .claude/worktrees/
+.claude
 
 # python
 scripts/python/venv

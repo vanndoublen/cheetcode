@@ -3,6 +3,8 @@ import prisma from "@/lib/db";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import z from "zod";
 import { getCDriver } from "./c-driver";
+import { auth } from "@clerk/nextjs/server";
+import { TRPCError } from "@trpc/server";
 
 const JUDGE0_URL = "https://judge0-ce.p.rapidapi.com";
 const JUDGE0_HEADERS = {
@@ -24,6 +26,17 @@ export const submissionsRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       try {
         const { problemSlug, sourceCode } = input;
+
+        const user = await prisma.user.findUnique({
+          where: { clerkId: ctx.auth.userId },
+        });
+
+        if (!user) {
+          throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "No user found",
+          });
+        }
 
         const problem = await prisma.problem.findUnique({
           where: { slug: problemSlug },
@@ -53,7 +66,7 @@ export const submissionsRouter = createTRPCRouter({
         }
 
         const { prompt, driver } = languageConfig;
-        
+
         let finalDriver = driver
           .replace(/{{ENTRY_POINT}}/g, problem.snippets[0].entryPoint)
           .replace(/{{INPUT_SIG}}/g, problem.inputSignature ?? "")
@@ -83,6 +96,7 @@ export const submissionsRouter = createTRPCRouter({
         const testCases = await prisma.testCase.findMany({
           where: {
             problemId: problem.id,
+            isHidden: input.isHidden,
             stdin: { not: null },
           },
           take: 10,
@@ -163,7 +177,64 @@ export const submissionsRouter = createTRPCRouter({
           }
         }
 
-        return allResults;
+        const allPassed = allResults.every((r: any) => r.status.id === 3);
+        const anyError = allResults.find((r: any) => r.status.id === 6); // compile error
+        const anyRuntimeError = allResults.find((r: any) => r.status.id === 11);
+        const anyTimeLimit = allResults.find((r: any) => r.status.id === 5);
+
+        const status = allPassed
+          ? "ACCEPTED"
+          : anyError
+            ? "COMPILE_ERROR"
+            : anyTimeLimit
+              ? "TIME_LIMIT_EXCEEDED"
+              : anyRuntimeError
+                ? "RUNTIME_ERROR"
+                : "WRONG_ANSWER";
+
+        const passingTimes = allResults
+          .filter((r: any) => r.status.id === 3 && r.time)
+          .map((r: any) => parseFloat(r.time) * 1000);
+        const avgRuntimeMs = passingTimes.length
+          ? Math.round(
+              passingTimes.reduce((a, b) => a + b, 0) / passingTimes.length,
+            )
+          : null;
+
+        const memoryKbs = allResults
+          .filter((r: any) => r.memory)
+          .map((r: any) => r.memory);
+        const avgMemoryKb = memoryKbs.length
+          ? Math.round(memoryKbs.reduce((a, b) => a + b, 0) / memoryKbs.length)
+          : null;
+
+        const submission = await prisma.submission.create({
+          data: {
+            userId: user?.id,
+            problemId: problem.id,
+            language: input.language as Language,
+            sourceCode,
+            status,
+            runtimeMs: avgRuntimeMs,
+            memoryKb: avgMemoryKb,
+            finishedAt: new Date(),
+            results: {
+              create: allResults.map((r: any, i: number) => ({
+                testCaseId: testCases[i].id,
+                passed: r.status.id === 3,
+                runtimeMs: r.time
+                  ? Math.round(parseFloat(r.time) * 1000)
+                  : null,
+                memoryKb: r.memory ?? null,
+                output: r.stdout ?? null,
+                error: r.stderr ?? r.compile_output ?? null,
+              })),
+            },
+          },
+          include: { results: true },
+        });
+
+        return submission;
       } catch (err) {
         console.error("SUBMIT ERROR:", err);
         throw err;

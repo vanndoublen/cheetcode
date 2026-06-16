@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -85,7 +86,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const snippet = snippets.find(s => s.language == selectedLanguage);
 
     const [code, setCode] = useState(snippet?.template || DEFAULT_TEMPLATE);
-    
+
     const trpc = useTRPC();
     const submissionsMutate = useMutation(trpc.submissions.submit.mutationOptions(
         {
@@ -153,6 +154,10 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         }
     }, [theme])
 
+    if (submissionsMutate.isPending) {
+        return <SubmissionOverlay visible={true} onDone={() => submissionsMutate.isSuccess} color="#ffffff" />
+    }
+
     return (
 
         <div className="flex flex-col h-full">
@@ -176,9 +181,9 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                     Submit
                 </Button>
             </div>
-            <div className=" flex-1 border-b  overflow-hidden">
+            <div className=" flex border-b overflow-hidden">
                 <Editor
-                    height="50vh"
+                    height="100vh"
                     defaultLanguage="c"
                     value={code}
                     defaultValue={code}
@@ -187,7 +192,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                     onMount={handleEditorMount}
                     options={{
                         minimap: { enabled: false },
-                        fontSize: 14,
+                        fontSize: 16,
                         fontFamily: "Geist Mono",
                         fontWeight: "500",
                         wordWrap: "on",
@@ -195,7 +200,9 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                         cursorStyle: "line"
                     }}
                 />
+
             </div>
+
         </div>
     );
 };
