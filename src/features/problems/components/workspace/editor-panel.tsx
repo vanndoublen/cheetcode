@@ -14,6 +14,7 @@ import { useTRPC } from "@/trpc/client";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
+import { useUserCodeDraft } from "@/features/drafts/hooks/use-code-draft";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -77,15 +78,20 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const { theme } = useTheme();
 
     const { data } = useProblemWorkspace(slug);
+    if (!data) {
+        return; 
+    }
 
-    const snippets = data?.snippets ?? [];
+    const snippets = data.snippets ?? [];
     const [selectedLanguage, setSelectedLanguage] = useState<Language>(
         snippets[0]?.language ?? "PYTHON3"
     );
 
     const snippet = snippets.find(s => s.language == selectedLanguage);
 
-    const [code, setCode] = useState(snippet?.template || DEFAULT_TEMPLATE);
+    const userCodeDraft = useUserCodeDraft(data.id, selectedLanguage); 
+
+    const [code, setCode] = useState(userCodeDraft?.data?.code || snippet?.template || DEFAULT_TEMPLATE);
 
     const trpc = useTRPC();
     const submissionsMutate = useMutation(trpc.submissions.submit.mutationOptions(

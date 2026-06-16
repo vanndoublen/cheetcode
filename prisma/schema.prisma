@@ -21,6 +21,7 @@ model User {
 
   submissions Submission[]
   progress    UserProblemProgress[]
+  drafts      UserCodeDraft[]
 }
 
 model Problem {
@@ -62,6 +63,7 @@ model Problem {
   examples              Example[]
   hints                 Hint[]
   followUps             FollowUp[]
+  userCodeDrafts        UserCodeDraft[]
 
   @@index([difficulty])
   @@index([isPublished])
@@ -114,7 +116,7 @@ model CodeSnippet {
   language       Language
   template       String
   driverOverride String?
-  entryPoint String?
+  entryPoint     String?
 
   problem Problem @relation(fields: [problemId], references: [id])
 
@@ -185,6 +187,19 @@ model UserProblemProgress {
   problem Problem @relation(fields: [problemId], references: [id])
 
   @@id([userId, problemId])
+}
+
+model UserCodeDraft {
+  userId    String
+  problemId String
+  language  Language
+  code      String
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id])
+  problem Problem @relation(fields: [problemId], references: [id])
+
+  @@id([userId, problemId, language])
 }
 
 model Example {

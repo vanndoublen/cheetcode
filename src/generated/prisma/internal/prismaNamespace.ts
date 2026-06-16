@@ -395,6 +395,7 @@ export const ModelName = {
   Submission: 'Submission',
   SubmissionResult: 'SubmissionResult',
   UserProblemProgress: 'UserProblemProgress',
+  UserCodeDraft: 'UserCodeDraft',
   Example: 'Example',
   Hint: 'Hint',
   FollowUp: 'FollowUp'
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "problem" | "category" | "tag" | "problemTag" | "testCase" | "codeSnippet" | "languageConfig" | "submission" | "submissionResult" | "userProblemProgress" | "example" | "hint" | "followUp"
+    modelProps: "user" | "problem" | "category" | "tag" | "problemTag" | "testCase" | "codeSnippet" | "languageConfig" | "submission" | "submissionResult" | "userProblemProgress" | "userCodeDraft" | "example" | "hint" | "followUp"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1231,6 +1232,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserCodeDraft: {
+      payload: Prisma.$UserCodeDraftPayload<ExtArgs>
+      fields: Prisma.UserCodeDraftFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserCodeDraftFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserCodeDraftFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>
+        }
+        findFirst: {
+          args: Prisma.UserCodeDraftFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserCodeDraftFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>
+        }
+        findMany: {
+          args: Prisma.UserCodeDraftFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>[]
+        }
+        create: {
+          args: Prisma.UserCodeDraftCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>
+        }
+        createMany: {
+          args: Prisma.UserCodeDraftCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserCodeDraftCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>[]
+        }
+        delete: {
+          args: Prisma.UserCodeDraftDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>
+        }
+        update: {
+          args: Prisma.UserCodeDraftUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserCodeDraftDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserCodeDraftUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserCodeDraftUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserCodeDraftUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodeDraftPayload>
+        }
+        aggregate: {
+          args: Prisma.UserCodeDraftAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserCodeDraft>
+        }
+        groupBy: {
+          args: Prisma.UserCodeDraftGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserCodeDraftGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserCodeDraftCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserCodeDraftCountAggregateOutputType> | number
+        }
+      }
+    }
     Example: {
       payload: Prisma.$ExamplePayload<ExtArgs>
       fields: Prisma.ExampleFieldRefs
@@ -1632,6 +1707,17 @@ export const UserProblemProgressScalarFieldEnum = {
 export type UserProblemProgressScalarFieldEnum = (typeof UserProblemProgressScalarFieldEnum)[keyof typeof UserProblemProgressScalarFieldEnum]
 
 
+export const UserCodeDraftScalarFieldEnum = {
+  userId: 'userId',
+  problemId: 'problemId',
+  language: 'language',
+  code: 'code',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserCodeDraftScalarFieldEnum = (typeof UserCodeDraftScalarFieldEnum)[keyof typeof UserCodeDraftScalarFieldEnum]
+
+
 export const ExampleScalarFieldEnum = {
   id: 'id',
   problemId: 'problemId',
@@ -1929,6 +2015,7 @@ export type GlobalOmitConfig = {
   submission?: Prisma.SubmissionOmit
   submissionResult?: Prisma.SubmissionResultOmit
   userProblemProgress?: Prisma.UserProblemProgressOmit
+  userCodeDraft?: Prisma.UserCodeDraftOmit
   example?: Prisma.ExampleOmit
   hint?: Prisma.HintOmit
   followUp?: Prisma.FollowUpOmit

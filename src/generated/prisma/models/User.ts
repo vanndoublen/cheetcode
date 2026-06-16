@@ -184,6 +184,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   submissions?: Prisma.SubmissionListRelationFilter
   progress?: Prisma.UserProblemProgressListRelationFilter
+  drafts?: Prisma.UserCodeDraftListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -194,6 +195,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   submissions?: Prisma.SubmissionOrderByRelationAggregateInput
   progress?: Prisma.UserProblemProgressOrderByRelationAggregateInput
+  drafts?: Prisma.UserCodeDraftOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -207,6 +209,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   submissions?: Prisma.SubmissionListRelationFilter
   progress?: Prisma.UserProblemProgressListRelationFilter
+  drafts?: Prisma.UserCodeDraftListRelationFilter
 }, "id" | "clerkId" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -239,6 +242,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
   progress?: Prisma.UserProblemProgressCreateNestedManyWithoutUserInput
+  drafts?: Prisma.UserCodeDraftCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -249,6 +253,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
   progress?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutUserInput
+  drafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -259,6 +264,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
   progress?: Prisma.UserProblemProgressUpdateManyWithoutUserNestedInput
+  drafts?: Prisma.UserCodeDraftUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -269,6 +275,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
   progress?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutUserNestedInput
+  drafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -364,6 +371,20 @@ export type UserUpdateOneRequiredWithoutProgressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProgressInput, Prisma.UserUpdateWithoutProgressInput>, Prisma.UserUncheckedUpdateWithoutProgressInput>
 }
 
+export type UserCreateNestedOneWithoutDraftsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDraftsInput, Prisma.UserUncheckedCreateWithoutDraftsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDraftsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDraftsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDraftsInput, Prisma.UserUncheckedCreateWithoutDraftsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDraftsInput
+  upsert?: Prisma.UserUpsertWithoutDraftsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDraftsInput, Prisma.UserUpdateWithoutDraftsInput>, Prisma.UserUncheckedUpdateWithoutDraftsInput>
+}
+
 export type UserCreateWithoutSubmissionsInput = {
   id?: string
   clerkId: string
@@ -371,6 +392,7 @@ export type UserCreateWithoutSubmissionsInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   progress?: Prisma.UserProblemProgressCreateNestedManyWithoutUserInput
+  drafts?: Prisma.UserCodeDraftCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubmissionsInput = {
@@ -380,6 +402,7 @@ export type UserUncheckedCreateWithoutSubmissionsInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   progress?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutUserInput
+  drafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubmissionsInput = {
@@ -405,6 +428,7 @@ export type UserUpdateWithoutSubmissionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   progress?: Prisma.UserProblemProgressUpdateManyWithoutUserNestedInput
+  drafts?: Prisma.UserCodeDraftUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubmissionsInput = {
@@ -414,6 +438,7 @@ export type UserUncheckedUpdateWithoutSubmissionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   progress?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutUserNestedInput
+  drafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProgressInput = {
@@ -423,6 +448,7 @@ export type UserCreateWithoutProgressInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
+  drafts?: Prisma.UserCodeDraftCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProgressInput = {
@@ -432,6 +458,7 @@ export type UserUncheckedCreateWithoutProgressInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
+  drafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProgressInput = {
@@ -457,6 +484,7 @@ export type UserUpdateWithoutProgressInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
+  drafts?: Prisma.UserCodeDraftUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProgressInput = {
@@ -466,6 +494,63 @@ export type UserUncheckedUpdateWithoutProgressInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
+  drafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDraftsInput = {
+  id?: string
+  clerkId: string
+  username: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
+  progress?: Prisma.UserProblemProgressCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDraftsInput = {
+  id?: string
+  clerkId: string
+  username: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
+  progress?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDraftsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDraftsInput, Prisma.UserUncheckedCreateWithoutDraftsInput>
+}
+
+export type UserUpsertWithoutDraftsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDraftsInput, Prisma.UserUncheckedUpdateWithoutDraftsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDraftsInput, Prisma.UserUncheckedCreateWithoutDraftsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDraftsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDraftsInput, Prisma.UserUncheckedUpdateWithoutDraftsInput>
+}
+
+export type UserUpdateWithoutDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
+  progress?: Prisma.UserProblemProgressUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
+  progress?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -476,11 +561,13 @@ export type UserUncheckedUpdateWithoutProgressInput = {
 export type UserCountOutputType = {
   submissions: number
   progress: number
+  drafts: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   submissions?: boolean | UserCountOutputTypeCountSubmissionsArgs
   progress?: boolean | UserCountOutputTypeCountProgressArgs
+  drafts?: boolean | UserCountOutputTypeCountDraftsArgs
 }
 
 /**
@@ -507,6 +594,13 @@ export type UserCountOutputTypeCountProgressArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.UserProblemProgressWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserCodeDraftWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -516,6 +610,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   submissions?: boolean | Prisma.User$submissionsArgs<ExtArgs>
   progress?: boolean | Prisma.User$progressArgs<ExtArgs>
+  drafts?: boolean | Prisma.User$draftsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -547,6 +642,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   submissions?: boolean | Prisma.User$submissionsArgs<ExtArgs>
   progress?: boolean | Prisma.User$progressArgs<ExtArgs>
+  drafts?: boolean | Prisma.User$draftsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -557,6 +653,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     submissions: Prisma.$SubmissionPayload<ExtArgs>[]
     progress: Prisma.$UserProblemProgressPayload<ExtArgs>[]
+    drafts: Prisma.$UserCodeDraftPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -960,6 +1057,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   submissions<T extends Prisma.User$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progress<T extends Prisma.User$progressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$progressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserProblemProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  drafts<T extends Prisma.User$draftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$draftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserCodeDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1427,6 +1525,30 @@ export type User$progressArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.UserProblemProgressScalarFieldEnum | Prisma.UserProblemProgressScalarFieldEnum[]
+}
+
+/**
+ * User.drafts
+ */
+export type User$draftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserCodeDraft
+   */
+  select?: Prisma.UserCodeDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserCodeDraft
+   */
+  omit?: Prisma.UserCodeDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserCodeDraftInclude<ExtArgs> | null
+  where?: Prisma.UserCodeDraftWhereInput
+  orderBy?: Prisma.UserCodeDraftOrderByWithRelationInput | Prisma.UserCodeDraftOrderByWithRelationInput[]
+  cursor?: Prisma.UserCodeDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserCodeDraftScalarFieldEnum | Prisma.UserCodeDraftScalarFieldEnum[]
 }
 
 /**

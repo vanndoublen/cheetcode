@@ -97,6 +97,11 @@ export type SubmissionResult = Prisma.SubmissionResultModel
  */
 export type UserProblemProgress = Prisma.UserProblemProgressModel
 /**
+ * Model UserCodeDraft
+ * 
+ */
+export type UserCodeDraft = Prisma.UserCodeDraftModel
+/**
  * Model Example
  * 
  */
