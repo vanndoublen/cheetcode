@@ -15,6 +15,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
 import { useUserCodeDraft } from "@/features/drafts/hooks/use-code-draft";
+import { ResultDialog } from "@/features/submissions/components/result-dialog";
+import { Submission } from "@/generated/prisma/client";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -74,6 +76,7 @@ const LANGUAGE_MAP: Record<Language, string> = {
 };
 
 export const EditorPanel = ({ slug }: { slug: string }) => {
+    const [isResultDialogOpen, setIsResultDialogOpen] = useState(true);
     const monacoRef = useRef<Monaco | null>(null);
     const { theme } = useTheme();
 
@@ -95,7 +98,11 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         {
             onSuccess(data, variables, onMutateResult, context) {
                 // console.log(data);
+                setIsResultDialogOpen(true);
             },
+            onError() {
+                setIsResultDialogOpen(true);
+            }
         }
     ));
 
@@ -125,7 +132,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
             problemSlug,
             sourceCode,
             language,
-            isHidden,
+            isHidden: true,
         })
     }
 
@@ -165,7 +172,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         const template = snippets.find(s => s.language === selectedLanguage)?.template ?? DEFAULT_TEMPLATE;
         setCode(draft ?? template);
 
-    }, [userCodeDraft.data, selectedLanguage]); 
+    }, [userCodeDraft.data, selectedLanguage]);
 
     useEffect(() => {
         if (!monacoRef.current) return;
@@ -179,7 +186,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     }, [theme])
 
     if (!data) return null;
-    
+
     if (submissionsMutate.isPending) {
         return <SubmissionOverlay visible={true} onDone={() => submissionsMutate.isSuccess} color="#ffffff" />
     }
@@ -226,6 +233,9 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                         cursorStyle: "line"
                     }}
                 />
+                {isResultDialogOpen && (
+                    <ResultDialog open={isResultDialogOpen} onOpenChange={setIsResultDialogOpen} data={submissionsMutate.data}/>
+                )}
 
             </div>
 

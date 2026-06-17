@@ -13,6 +13,17 @@ const JUDGE0_HEADERS = {
   "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
 };
 
+type Judge0Result = {
+  token: string;
+  status: { id: number; description: string };
+  stdout: string | null;
+  stderr: string | null;
+  compile_output: string | null;
+  expected_output: string | null;
+  time: string | null;
+  memory: number | null;
+};
+
 export const submissionsRouter = createTRPCRouter({
   submit: protectedProcedure
     .input(
@@ -134,7 +145,7 @@ export const submissionsRouter = createTRPCRouter({
           allTokens.push(...chunkTokens);
         }
 
-        const allResults: any[] = [];
+        const allResults: Judge0Result[] = [];
 
         for (let i = 0; i < allTokens.length; i += BATCH_SIZE) {
           const tokenChunk = allTokens.slice(i, i + BATCH_SIZE);
