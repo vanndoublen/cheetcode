@@ -76,7 +76,7 @@ const LANGUAGE_MAP: Record<Language, string> = {
 };
 
 export const EditorPanel = ({ slug }: { slug: string }) => {
-    const [isResultDialogOpen, setIsResultDialogOpen] = useState(true);
+    const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
     const monacoRef = useRef<Monaco | null>(null);
     const { theme } = useTheme();
 
@@ -214,9 +214,9 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                     Submit
                 </Button>
             </div>
-            <div className=" flex border-b overflow-hidden">
+            <div className=" flex-1 border-b overflow-hidden">
                 <Editor
-                    height="100vh"
+                    height="100%"
                     defaultLanguage="c"
                     value={code}
                     defaultValue={code}
