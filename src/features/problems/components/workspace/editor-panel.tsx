@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useDebugValue, useEffect, useRef, useState } from "react";
 import Monokai from "../../../../../node_modules/monaco-themes/themes/Monokai.json";
 import dynamic from "next/dynamic";
 import { type Monaco } from "@monaco-editor/react";
@@ -78,29 +78,35 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const { theme } = useTheme();
 
     const { data } = useProblemWorkspace(slug);
-    if (!data) {
-        return; 
-    }
 
-    const snippets = data.snippets ?? [];
+    const snippets = data?.snippets ?? [];
     const [selectedLanguage, setSelectedLanguage] = useState<Language>(
         snippets[0]?.language ?? "PYTHON3"
     );
 
     const snippet = snippets.find(s => s.language == selectedLanguage);
 
-    const userCodeDraft = useUserCodeDraft(data.id, selectedLanguage); 
+    const userCodeDraft = useUserCodeDraft(data?.id ?? "", selectedLanguage);
 
-    const [code, setCode] = useState(userCodeDraft?.data?.code || snippet?.template || DEFAULT_TEMPLATE);
+    const [code, setCode] = useState(snippet?.template || DEFAULT_TEMPLATE);
 
     const trpc = useTRPC();
     const submissionsMutate = useMutation(trpc.submissions.submit.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
-                console.log(data);
+                // console.log(data);
             },
         }
     ));
+
+    const draftMutate = useMutation(trpc.userCodeDrafts.create.mutationOptions(
+        {
+            onSuccess(data) {
+                // console.log(data);
+            }
+        }
+    ));
+
 
     const handleSubmit = async (
         problemSlug: string,
@@ -108,6 +114,13 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         language: string,
         isHidden: false,
     ) => {
+
+        draftMutate.mutate({
+            problemId: data?.id ?? "",
+            language: selectedLanguage,
+            code: code,
+        })
+
         await submissionsMutate.mutateAsync({
             problemSlug,
             sourceCode,
@@ -143,11 +156,16 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     }
 
     const handleLanguageChange = (lang: Language) => {
+        draftMutate.mutate({ problemId: data?.id || "", language: selectedLanguage, code });
         setSelectedLanguage(lang);
-        const snippet = snippets.find(s => s.language == lang);
-        setCode(snippet?.template ?? "");
-
     }
+
+    useEffect(() => {
+        const draft = userCodeDraft.data?.code;
+        const template = snippets.find(s => s.language === selectedLanguage)?.template ?? DEFAULT_TEMPLATE;
+        setCode(draft ?? template);
+
+    }, [userCodeDraft.data, selectedLanguage]); 
 
     useEffect(() => {
         if (!monacoRef.current) return;
@@ -160,6 +178,8 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         }
     }, [theme])
 
+    if (!data) return null;
+    
     if (submissionsMutate.isPending) {
         return <SubmissionOverlay visible={true} onDone={() => submissionsMutate.isSuccess} color="#ffffff" />
     }

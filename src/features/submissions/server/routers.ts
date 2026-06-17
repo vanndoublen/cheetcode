@@ -235,6 +235,7 @@ export const submissionsRouter = createTRPCRouter({
         });
 
         return submission;
+
       } catch (err) {
         console.error("SUBMIT ERROR:", err);
         throw err;
