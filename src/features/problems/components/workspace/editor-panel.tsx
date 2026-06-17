@@ -94,7 +94,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const [code, setCode] = useState(snippet?.template || DEFAULT_TEMPLATE);
 
     const trpc = useTRPC();
-    const submissionsMutate = useMutation(trpc.submissions.submit.mutationOptions(
+    const submissionsMutate = useMutation(trpc.submissions.run.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
                 // console.log(data);
@@ -119,7 +119,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         problemSlug: string,
         sourceCode: string,
         language: string,
-        isHidden: false,
+        isHidden: boolean,
     ) => {
 
         draftMutate.mutate({
@@ -132,7 +132,8 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
             problemSlug,
             sourceCode,
             language,
-            isHidden: true,
+            isHidden: isHidden,
+            isSave: true,
         })
     }
 
@@ -209,7 +210,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                 </Select>
 
                 <Button
-                    onClick={() => handleSubmit(slug, code, selectedLanguage, false)}
+                    onClick={() => handleSubmit(slug, code, selectedLanguage, true)}
                 >
                     Submit
                 </Button>

@@ -202,17 +202,32 @@ const runJudge0 = async (batchSize: number, submissions: Judge0Input[]) => {
   };
 };
 
+export type RunResult = {
+  status: SubmissionStatus;
+  runtimeMs: number | null;
+  memoryKb: number | null;
+  createdAt: Date | null;
+  results: {
+    testCaseId: string;
+    passed: boolean;
+    output: string | null;
+    error: string | null;
+    runtimeMs: number | null;
+  }[];
+};
+
 export const submissionsRouter = createTRPCRouter({
-  submit: protectedProcedure
+  run: protectedProcedure
     .input(
       z.object({
         problemSlug: z.string(),
         sourceCode: z.string(),
         language: z.enum(Object.values(Language) as [string, ...string[]]),
         isHidden: z.boolean().default(false),
+        isSave: z.boolean().default(true),
       }),
     )
-    .mutation(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx }): Promise<RunResult> => {
       try {
         const { problemSlug, sourceCode } = input;
 
@@ -253,33 +268,47 @@ export const submissionsRouter = createTRPCRouter({
         const { status, avgMemoryKb, avgRuntimeMs, allResults } =
           await runJudge0(10, submissions);
 
-        const submission = await prisma.submission.create({
-          data: {
-            userId: user.id,
-            problemId: problemId,
-            language: input.language as Language,
-            sourceCode,
-            status: status,
-            runtimeMs: avgRuntimeMs,
-            memoryKb: avgMemoryKb,
-            finishedAt: new Date(),
-            results: {
-              create: allResults.map((r: any, i: number) => ({
-                testCaseId: testCases[i].id,
-                passed: r.status.id === 3,
-                runtimeMs: r.time
-                  ? Math.round(parseFloat(r.time) * 1000)
-                  : null,
-                memoryKb: r.memory ?? null,
-                output: r.stdout ?? null,
-                error: r.stderr ?? r.compile_output ?? null,
-              })),
-            },
-          },
-          include: { results: true },
-        });
+        const savedResults = input.isSave
+          ? await prisma.submission.create({
+              data: {
+                userId: user.id,
+                problemId: problemId,
+                language: input.language as Language,
+                sourceCode,
+                status: status,
+                runtimeMs: avgRuntimeMs,
+                memoryKb: avgMemoryKb,
+                finishedAt: new Date(),
+                results: {
+                  create: allResults.map((r: any, i: number) => ({
+                    testCaseId: testCases[i].id,
+                    passed: r.status.id === 3,
+                    runtimeMs: r.time
+                      ? Math.round(parseFloat(r.time) * 1000)
+                      : null,
+                    memoryKb: r.memory ?? null,
+                    output: r.stdout ?? null,
+                    error: r.stderr ?? r.compile_output ?? null,
+                  })),
+                },
+              },
+              include: { results: true },
+            })
+          : null;
 
-        return submission;
+        return {
+          status,
+          runtimeMs: avgRuntimeMs,
+          memoryKb: avgMemoryKb,
+          createdAt: input.isSave ? new Date() : null,
+          results: allResults.map((r, i) => ({
+            testCaseId: testCases[i].id,
+            passed: r.status.id === 3,
+            output: r.stdout ?? null,
+            error: r.stderr ?? r.compile_output ?? null,
+            runtimeMs: r.time ? Math.round(parseFloat(r.time) * 1000) : null,
+          })),
+        };
       } catch (err) {
         console.error("SUBMIT ERROR:", err);
         throw err;
@@ -339,12 +368,12 @@ export const submissionsRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       const testCases = await prisma.testCase.findMany({
         where: {
-          problem: {slug: input.problemSlug},
+          problem: { slug: input.problemSlug },
           isHidden: false,
           stdin: { not: null },
         },
         orderBy: { order: "asc" },
-        take: 10,
+        take: 5,
       });
       return testCases;
     }),

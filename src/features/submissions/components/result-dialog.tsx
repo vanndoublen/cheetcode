@@ -11,15 +11,11 @@ import {
 } from "@/components/ui/dialog"
 import { Prisma, SubmissionResult } from "@/generated/prisma/client";
 import { cn } from "@/lib/utils";
-
-type SubmissionWithResults = Prisma.SubmissionGetPayload<{
-    include: { results: true }
-}>;
-
+import { RunResult } from "../server/routers";
 interface Props {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    data: SubmissionWithResults | undefined;
+    data: RunResult | undefined;
 }
 
 export const ResultDialog = ({ open, onOpenChange, data }: Props) => {
@@ -65,8 +61,8 @@ export const ResultDialog = ({ open, onOpenChange, data }: Props) => {
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                    {data && data.results.map((result: SubmissionResult, i) => (
-                        <div key={result.id} className={cn("size-8 border border-blue-400 flex items-center justify-center text-center", !result.passed && "border-destructive text-destructive")}>
+                    {data && data.results.map((result, i) => (
+                        <div key={result.testCaseId} className={cn("size-8 border border-blue-400 flex items-center justify-center text-center", !result.passed && "border-destructive text-destructive")}>
                             <div>
                                 {i + 1}
                             </div>
