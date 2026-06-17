@@ -17,6 +17,9 @@ import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
 import { useUserCodeDraft } from "@/features/drafts/hooks/use-code-draft";
 import { ResultDialog } from "@/features/submissions/components/result-dialog";
 import { Submission } from "@/generated/prisma/client";
+import { Allotment } from "allotment";
+import { TestRunPanel } from "./test-run-panel";
+import "allotment/dist/style.css"
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -216,27 +219,35 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                 </Button>
             </div>
             <div className=" flex-1 border-b overflow-hidden">
-                <Editor
-                    height="100%"
-                    defaultLanguage="c"
-                    value={code}
-                    defaultValue={code}
-                    language={LANGUAGE_MAP[selectedLanguage] ?? "plaintext"}
-                    onChange={(value) => setCode(value ?? "")}
-                    onMount={handleEditorMount}
-                    options={{
-                        minimap: { enabled: false },
-                        fontSize: 16,
-                        fontFamily: "Geist Mono",
-                        fontWeight: "500",
-                        wordWrap: "on",
-                        cursorBlinking: "smooth",
-                        cursorStyle: "line"
-                    }}
-                />
-                {isResultDialogOpen && (
-                    <ResultDialog open={isResultDialogOpen} onOpenChange={setIsResultDialogOpen} data={submissionsMutate.data}/>
-                )}
+                <Allotment vertical>
+                    <Allotment.Pane>
+                        <Editor
+                            height="100%"
+                            defaultLanguage="c"
+                            value={code}
+                            defaultValue={code}
+                            language={LANGUAGE_MAP[selectedLanguage] ?? "plaintext"}
+                            onChange={(value) => setCode(value ?? "")}
+                            onMount={handleEditorMount}
+                            options={{
+                                minimap: { enabled: false },
+                                fontSize: 14,
+                                fontFamily: "Geist Mono",
+                                fontWeight: "500",
+                                wordWrap: "on",
+                                cursorBlinking: "smooth",
+                                cursorStyle: "line"
+                            }}
+                        />
+                        {isResultDialogOpen && (
+                            <ResultDialog open={isResultDialogOpen} onOpenChange={setIsResultDialogOpen} data={submissionsMutate.data} />
+                        )}
+                    </Allotment.Pane>
+                    
+                    <Allotment.Pane>
+                        <TestRunPanel problemSlug={slug} sourceCode={code} language={selectedLanguage} />
+                    </Allotment.Pane>
+                </Allotment>
 
             </div>
 

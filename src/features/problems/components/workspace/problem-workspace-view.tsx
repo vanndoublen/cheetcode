@@ -27,14 +27,7 @@ export const ProblemWorkspaceView = ({ slug }: { slug: string }) => {
                     <InfoPanel slug={slug} />
                 </Allotment.Pane>
                 <Allotment.Pane>
-                    <Allotment vertical>
-                        <Allotment.Pane >
-                            <EditorPanel slug={slug} />
-                        </Allotment.Pane>
-                        <Allotment.Pane>
-                            <TestRunPanel problemSlug={slug}/>
-                        </Allotment.Pane>
-                    </Allotment>
+                    <EditorPanel slug={slug} />
                 </Allotment.Pane>
             </Allotment>
         </div>
