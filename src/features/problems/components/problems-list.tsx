@@ -22,22 +22,55 @@ import { useRouter } from "next/navigation";
 
 
 const renderDifficulty = (difficulty: string) => {
-  let color = ""
+  const level = difficulty === "EASY" ? 1 : difficulty === "MEDIUM" ? 2 : 3;
 
-  if (difficulty === "EASY") {
-    color = "bg-green-100 text-green-700"
-  } else if (difficulty === "MEDIUM") {
-    color = "bg-yellow-100 text-yellow-700"
-  } else if (difficulty === "HARD") {
-    color = "bg-red-100 text-red-700"
-  }
+  const color = "text-foreground";
+  // const color =
+  //   difficulty === "EASY"
+  //     ? "text-green-300"
+  //     : difficulty === "MEDIUM"
+  //     ? "text-blue-300"
+  //     : "text-red-300";
+
+  // three arc segments across a 180° top semicircle
+  const R = 8, cx = 11, cy = 11;
+  const segs = [
+    { a0: 180, a1: 240 },
+    { a0: 240, a1: 300 },
+    { a0: 300, a1: 360 },
+  ];
+  const pt = (ang: number): [number, number] => [
+    cx + R * Math.cos((ang * Math.PI) / 180),
+    cy + R * Math.sin((ang * Math.PI) / 180),
+  ];
 
   return (
-    <span className={`px-2 py-1 rounded text-xs font-medium ${color}`}>
-      {difficulty}
+    <span
+      className={`inline-flex justify-end ${color}`}
+      title={difficulty[0] + difficulty.slice(1).toLowerCase()}
+    >
+      <span className="sr-only">{difficulty}</span>
+      <svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true">
+        {segs.map((s, i) => {
+          const [x0, y0] = pt(s.a0);
+          const [x1, y1] = pt(s.a1);
+          const active = i < level;
+          return (
+            <path
+              key={i}
+              d={`M ${x0} ${y0} A ${R} ${R} 0 0 1 ${x1} ${y1}`}
+              fill="none"
+              strokeWidth={3}
+              strokeLinecap="round"
+              stroke={active ? "currentColor" : "currentColor"}
+              className={active ? "opacity-100" : "opacity-15"}
+            />
+          );
+        })}
+      </svg>
     </span>
-  )
-}
+  );
+};
 
 const renderTag = (
   tags: { tag: { name: string } }[]
@@ -76,7 +109,7 @@ export const ProblemsList = () => {
   return (
     <div className="p-4 border">
       <Table>
-        <TableHeader>
+        <TableHeader className="pointer-events-none">
           <TableRow>
             <TableHead className="w-25">No</TableHead>
             <TableHead className="truncate">Title</TableHead>
@@ -87,12 +120,13 @@ export const ProblemsList = () => {
         </TableHeader>
         <TableBody>
           {problems.items.map((problem, index) => (
-            <TableRow key={problem.slug} className="h-10!">
+            <TableRow
+              key={problem.slug}
+              className="h-10! cursor-pointer"
+              onClick={() => router.push(`/problems/${problem.slug}`)}
+            >
               <TableCell className="font-medium">{((problems.page - 1) * problems.pageSize) + index + 1}</TableCell>
               <TableCell
-                className="cursor-pointer hover:underline"
-                onClick={() => router.push(`/problems/${problem.slug}`)}
-                
               >
                 {problem.title}
               </TableCell>
