@@ -3,6 +3,7 @@ import { InfoPanel } from "./info-panel";
 import { EditorPanel } from "./editor-panel";
 import { Allotment } from "allotment";
 import "allotment/dist/style.css"
+import { TestRunPanel } from "./test-run-panel";
 
 
 const MIN_SIDEBAR_WIDTH = 600;
@@ -31,7 +32,7 @@ export const ProblemWorkspaceView = ({ slug }: { slug: string }) => {
                             <EditorPanel slug={slug} />
                         </Allotment.Pane>
                         <Allotment.Pane>
-                            <div className="h-full bg-red-300"></div>
+                            <TestRunPanel problemSlug={slug}/>
                         </Allotment.Pane>
                     </Allotment>
                 </Allotment.Pane>
