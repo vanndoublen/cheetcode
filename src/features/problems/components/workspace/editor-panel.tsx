@@ -11,7 +11,7 @@ import { useProblemWorkspace } from "../../hooks/use-problems";
 import { Language } from "@/generated/prisma/enums";
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
 import { useUserCodeDraft } from "@/features/drafts/hooks/use-code-draft";
@@ -89,6 +89,15 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const [selectedLanguage, setSelectedLanguage] = useState<Language>(
         snippets[0]?.language ?? "PYTHON3"
     );
+
+    const trpcClient = useTRPC();
+    const { data: supportedLanguages } = useQuery(
+        trpcClient.submissions.getSupportedLanguages.queryOptions({ problemSlug: slug })
+    );
+    // Only offer languages whose driver can actually run this problem's signature.
+    const visibleSnippets = supportedLanguages
+        ? snippets.filter((s) => supportedLanguages.includes(s.language))
+        : snippets;
 
     const snippet = snippets.find(s => s.language == selectedLanguage);
 
@@ -204,7 +213,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                        {snippets.map(s => (
+                        {visibleSnippets.map(s => (
                             <SelectItem key={s.language} value={s.language} className="text-xs">
                                 {s.language}
                             </SelectItem>

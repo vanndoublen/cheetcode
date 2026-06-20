@@ -16,7 +16,8 @@ const CONFIGS: Config[] = [
   {
     language: Language.PYTHON3,
     judge0Id: 71,
-    prompt: `import sys
+    prompt: `from __future__ import annotations
+import sys
 import json
 import random
 import functools
@@ -131,6 +132,7 @@ print(_result)`,
     language: Language.PYTHON,
     judge0Id: 71, // intentionally use Python 3 interpreter
     prompt: `# Note: This runs under Python 3 for compatibility.
+from __future__ import annotations
 import sys
 import collections
 from typing import *
@@ -285,7 +287,7 @@ const _outSig = "{{OUTPUT_SIG}}";
 if (_outSig === "ListNode" || _outSig === "ListNode?") _result = listNodeToArray(_result);
 else if (_outSig === "TreeNode" || _outSig === "TreeNode?") _result = treeNodeToArray(_result);
 
-console.log(pyPrint(_result));`,
+console.log(typeof _result === "string" ? _result : pyPrint(_result));`,
   },
 
   // ============================================================
@@ -389,7 +391,7 @@ const _outSig: any = "{{OUTPUT_SIG}}";
 if (_outSig === "ListNode" || _outSig === "ListNode?") _result = listNodeToArray(_result);
 else if (_outSig === "TreeNode" || _outSig === "TreeNode?") _result = treeNodeToArray(_result);
 
-console.log(pyPrint(_result));`,
+console.log(typeof _result === "string" ? _result : pyPrint(_result));`,
   },
 
   // ============================================================
@@ -513,7 +515,7 @@ public class Main {
             result = Helpers.listNodeToList((ListNode) result);
         }
 
-        System.out.println(Helpers.pyStr(result));
+        System.out.println(result instanceof String ? (String) result : Helpers.pyStr(result));
     }
 }`,
   },
@@ -615,7 +617,7 @@ public class Program {
         var outSig = "{{OUTPUT_SIG}}";
         if (outSig == "ListNode" || outSig == "ListNode?") result = Helpers.ListNodeToList((ListNode)result);
 
-        Console.WriteLine(Helpers.PyStr(result));
+        Console.WriteLine(result is string s2 ? s2 : Helpers.PyStr(result));
     }
 }`,
   },

@@ -61,6 +61,16 @@ export const SubmissionStatus = {
 export type SubmissionStatus = (typeof SubmissionStatus)[keyof typeof SubmissionStatus]
 
 
+export const JudgeMode = {
+  EXACT: 'EXACT',
+  NORMALIZED: 'NORMALIZED',
+  CHECKER: 'CHECKER',
+  UNSUPPORTED: 'UNSUPPORTED'
+} as const
+
+export type JudgeMode = (typeof JudgeMode)[keyof typeof JudgeMode]
+
+
 export const ProgressStatus = {
   ATTEMPTED: 'ATTEMPTED',
   SOLVED: 'SOLVED'

@@ -3,8 +3,11 @@ import prisma from "@/lib/db";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import z from "zod";
 import { getCDriver } from "./c-driver";
+import { buildCppDriver } from "./cpp-driver";
+import { getSupportedLanguages } from "./supported-languages";
 import { auth } from "@clerk/nextjs/server";
 import { TRPCError } from "@trpc/server";
+import { judge, type JudgeMode } from "./judge";
 
 const JUDGE0_URL = "https://judge0-ce.p.rapidapi.com";
 const JUDGE0_HEADERS = {
@@ -19,16 +22,47 @@ type Judge0Result = {
   stdout: string | null;
   stderr: string | null;
   compile_output: string | null;
-  expected_output: string | null;
   time: string | null;
   memory: number | null;
 };
 
+// We no longer send expected_output — Judge0 only executes; judge() decides
+// correctness. So status 3 means "ran", not "correct".
 type Judge0Input = {
   source_code: string;
   language_id: number | undefined;
   stdin: string;
-  expected_output: string;
+};
+
+/**
+ * Java/C# assemble the script as `prompt + userCode + driver`. The prompt
+ * already declares all imports and a `public class`, so user code with its own
+ * `import` lines or `public class Solution` won't compile. Strip them.
+ */
+const sanitizeUserCode = (language: string, code: string): string => {
+  if (language === Language.JAVA || language === Language.CSHARP) {
+    return code
+      .replace(/^\s*import\s+[^;]+;\s*$/gm, "")
+      .replace(/^(\s*)public\s+(class|enum|interface)\b/m, "$1$2");
+  }
+  return code;
+};
+
+const isCompileError = (id: number) => id === 6;
+const isTimeLimit = (id: number) => id === 5;
+const isRuntimeError = (id: number) => id >= 7; // 7..12 runtime, 13/14 internal
+
+/** Roll up per-test outcomes into one submission status. */
+const aggregateStatus = (
+  results: Judge0Result[],
+  passed: boolean[],
+): SubmissionStatus => {
+  if (passed.every(Boolean)) return "ACCEPTED";
+  if (results.some((r) => isCompileError(r.status.id))) return "COMPILE_ERROR";
+  if (results.some((r) => isTimeLimit(r.status.id)))
+    return "TIME_LIMIT_EXCEEDED";
+  if (results.some((r) => isRuntimeError(r.status.id))) return "RUNTIME_ERROR";
+  return "WRONG_ANSWER";
 };
 
 const createScript = async (
@@ -51,7 +85,8 @@ const createScript = async (
     },
   });
 
-  if (!problem || !problem.snippets[0].entryPoint) {
+
+    if (!problem || !problem.snippets[0]?.entryPoint) {
     throw new Error(`Problem not found or missing entry point: ${problemSlug}`);
   }
 
@@ -87,12 +122,30 @@ const createScript = async (
     );
   }
 
-  const fullScript = `${prompt}\n\n${sourceCode}\n\n${finalDriver}`;
+  // Override for C++ — generic codegen driver from the signature.
+  if (language === Language.CPP) {
+    const cppDriver = buildCppDriver(
+      problem.inputSignature ?? "",
+      problem.outputSignature ?? "",
+      problem.snippets[0].entryPoint,
+    );
+    if (!cppDriver) {
+      throw new Error(
+        `C++ is not supported for this problem signature: (${problem.inputSignature}) -> ${problem.outputSignature}`,
+      );
+    }
+    finalDriver = cppDriver;
+  }
+
+  const cleanCode = sanitizeUserCode(language, sourceCode);
+  const fullScript = `${prompt}\n\n${cleanCode}\n\n${finalDriver}`;
 
   return {
     problemId: problem.id,
     languageConfig,
     fullScript,
+    judgeMode: problem.judgeMode as JudgeMode,
+    checkerKey: problem.checkerKey,
   };
 };
 
@@ -130,13 +183,12 @@ const runJudge0 = async (batchSize: number, submissions: Judge0Input[]) => {
 
     while (true) {
       const pollResponse = await fetch(
-        `${JUDGE0_URL}/submissions/batch?tokens=${tokenString}&base64_encoded=true&fields=token,status,stdout,stderr,compile_output,expected_output,time,memory`,
+        `${JUDGE0_URL}/submissions/batch?tokens=${tokenString}&base64_encoded=true&fields=token,status,stdout,stderr,compile_output,time,memory`,
 
         { headers: JUDGE0_HEADERS },
       );
 
       const data = await pollResponse.json();
-      console.log("Poll data:", JSON.stringify(data, null, 2));
       const chunkResults = data.submissions;
 
       const decoded = chunkResults.map((r: any) => ({
@@ -150,9 +202,6 @@ const runJudge0 = async (batchSize: number, submissions: Judge0Input[]) => {
         compile_output: r.compile_output
           ? Buffer.from(r.compile_output, "base64").toString("utf-8")
           : null,
-        expected_output: r.expected_output
-          ? Buffer.from(r.expected_output, "base64").toString("utf-8")
-          : null,
       }));
 
       const allDone = decoded.every((r: any) => r.status.id > 2);
@@ -165,41 +214,22 @@ const runJudge0 = async (batchSize: number, submissions: Judge0Input[]) => {
     }
   }
 
-  const allPassed = allResults.every((r: any) => r.status.id === 3);
-  const anyError = allResults.find((r: any) => r.status.id === 6); // compile error
-  const anyRuntimeError = allResults.find((r: any) => r.status.id === 11);
-  const anyTimeLimit = allResults.find((r: any) => r.status.id === 5);
-
-  const status = allPassed
-    ? "ACCEPTED"
-    : anyError
-      ? "COMPILE_ERROR"
-      : anyTimeLimit
-        ? "TIME_LIMIT_EXCEEDED"
-        : anyRuntimeError
-          ? "RUNTIME_ERROR"
-          : "WRONG_ANSWER";
-
-  const passingTimes = allResults
-    .filter((r: any) => r.status.id === 3 && r.time)
-    .map((r: any) => parseFloat(r.time) * 1000);
-  const avgRuntimeMs = passingTimes.length
-    ? Math.round(passingTimes.reduce((a, b) => a + b, 0) / passingTimes.length)
+  // Averages over executed runs (status 3 = ran successfully).
+  const ranTimes = allResults
+    .filter((r) => r.status.id === 3 && r.time)
+    .map((r) => parseFloat(r.time!) * 1000);
+  const avgRuntimeMs = ranTimes.length
+    ? Math.round(ranTimes.reduce((a, b) => a + b, 0) / ranTimes.length)
     : null;
 
   const memoryKbs = allResults
-    .filter((r: any) => r.memory)
-    .map((r: any) => r.memory);
+    .filter((r) => r.memory)
+    .map((r) => r.memory!);
   const avgMemoryKb = memoryKbs.length
     ? Math.round(memoryKbs.reduce((a, b) => a + b, 0) / memoryKbs.length)
     : null;
 
-  return {
-    avgMemoryKb,
-    avgRuntimeMs,
-    allResults,
-    status: status as SubmissionStatus,
-  };
+  return { avgMemoryKb, avgRuntimeMs, allResults };
 };
 
 export type RunResult = {
@@ -242,19 +272,17 @@ export const submissionsRouter = createTRPCRouter({
           });
         }
 
-        // const fullScript = `${prompt}\n\n${sourceCode}\n\nimport sys\n_data = sys.stdin.read().splitlines()\n_args = [eval(line) for line in _data if line.strip()]\nprint(${problem.entryPoint}(*_args))`;
-        const { problemId, languageConfig, fullScript } = await createScript(
-          problemSlug,
-          input.language,
-          input.sourceCode,
-        );
+        const { problemId, languageConfig, fullScript, judgeMode, checkerKey } =
+          await createScript(problemSlug, input.language, input.sourceCode);
 
         const testCases = await prisma.testCase.findMany({
           where: {
             problemId: problemId,
             isHidden: input.isHidden,
             stdin: { not: null },
+            isValid: true,
           },
+          orderBy: { order: "asc" },
           take: 10,
         });
 
@@ -262,39 +290,52 @@ export const submissionsRouter = createTRPCRouter({
           source_code: Buffer.from(fullScript || "").toString("base64"),
           language_id: languageConfig.judge0Id,
           stdin: t.stdin ? Buffer.from(t.stdin).toString("base64") : "",
-          expected_output: Buffer.from(t.expected).toString("base64"),
         }));
 
-        const { status, avgMemoryKb, avgRuntimeMs, allResults } =
-          await runJudge0(10, submissions);
+        const { avgMemoryKb, avgRuntimeMs, allResults } = await runJudge0(
+          10,
+          submissions,
+        );
 
-        const savedResults = input.isSave
-          ? await prisma.submission.create({
-              data: {
-                userId: user.id,
-                problemId: problemId,
-                language: input.language as Language,
-                sourceCode,
-                status: status,
-                runtimeMs: avgRuntimeMs,
-                memoryKb: avgMemoryKb,
-                finishedAt: new Date(),
-                results: {
-                  create: allResults.map((r: any, i: number) => ({
-                    testCaseId: testCases[i].id,
-                    passed: r.status.id === 3,
-                    runtimeMs: r.time
-                      ? Math.round(parseFloat(r.time) * 1000)
-                      : null,
-                    memoryKb: r.memory ?? null,
-                    output: r.stdout ?? null,
-                    error: r.stderr ?? r.compile_output ?? null,
-                  })),
-                },
+        // Decide correctness in-app for each executed test case.
+        const passedFlags = allResults.map((r, i) =>
+          r.status.id === 3 &&
+          judge({
+            mode: judgeMode,
+            expected: testCases[i].expected,
+            actual: r.stdout ?? "",
+            stdin: testCases[i].stdin ?? "",
+            checkerKey,
+          }),
+        );
+        const status = aggregateStatus(allResults, passedFlags);
+
+        if (input.isSave) {
+          await prisma.submission.create({
+            data: {
+              userId: user.id,
+              problemId: problemId,
+              language: input.language as Language,
+              sourceCode,
+              status: status,
+              runtimeMs: avgRuntimeMs,
+              memoryKb: avgMemoryKb,
+              finishedAt: new Date(),
+              results: {
+                create: allResults.map((r, i) => ({
+                  testCaseId: testCases[i].id,
+                  passed: passedFlags[i],
+                  runtimeMs: r.time
+                    ? Math.round(parseFloat(r.time) * 1000)
+                    : null,
+                  memoryKb: r.memory ?? null,
+                  output: r.stdout ?? null,
+                  error: r.stderr ?? r.compile_output ?? null,
+                })),
               },
-              include: { results: true },
-            })
-          : null;
+            },
+          });
+        }
 
         return {
           status,
@@ -303,7 +344,7 @@ export const submissionsRouter = createTRPCRouter({
           createdAt: input.isSave ? new Date() : null,
           results: allResults.map((r, i) => ({
             testCaseId: testCases[i].id,
-            passed: r.status.id === 3,
+            passed: passedFlags[i],
             output: r.stdout ?? null,
             error: r.stderr ?? r.compile_output ?? null,
             runtimeMs: r.time ? Math.round(parseFloat(r.time) * 1000) : null,
@@ -326,30 +367,32 @@ export const submissionsRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      const { problemId, languageConfig, fullScript } = await createScript(
-        input.problemSlug,
-        input.language,
-        input.sourceCode,
-      );
+      const { languageConfig, fullScript, judgeMode, checkerKey } =
+        await createScript(input.problemSlug, input.language, input.sourceCode);
 
       const submissions = [
         {
           source_code: Buffer.from(fullScript || "").toString("base64"),
           language_id: languageConfig.judge0Id,
           stdin: input.stdin ? Buffer.from(input.stdin).toString("base64") : "",
-          expected_output: Buffer.from(input.expected).toString("base64"),
         },
       ];
 
-      const { status, avgMemoryKb, avgRuntimeMs, allResults } = await runJudge0(
-        10,
-        submissions,
-      );
-
+      const { allResults } = await runJudge0(10, submissions);
       const result = allResults[0];
 
+      const passed =
+        result.status.id === 3 &&
+        judge({
+          mode: judgeMode,
+          expected: input.expected,
+          actual: result.stdout ?? "",
+          stdin: input.stdin,
+          checkerKey,
+        });
+
       return {
-        passed: result.status.id === 3,
+        passed,
         output: result.stdout ?? null,
         error: result.stderr ?? result.compile_output ?? null,
         runtimeMs: result.time
@@ -357,6 +400,20 @@ export const submissionsRouter = createTRPCRouter({
           : null,
         memoryKb: result.memory ?? null,
       };
+    }),
+
+  getSupportedLanguages: protectedProcedure
+    .input(z.object({ problemSlug: z.string() }))
+    .query(async ({ input }) => {
+      const problem = await prisma.problem.findUnique({
+        where: { slug: input.problemSlug },
+        select: { inputSignature: true, outputSignature: true },
+      });
+      if (!problem) return [];
+      return getSupportedLanguages(
+        problem.inputSignature,
+        problem.outputSignature,
+      );
     }),
 
   getPublicCases: protectedProcedure
@@ -371,6 +428,7 @@ export const submissionsRouter = createTRPCRouter({
           problem: { slug: input.problemSlug },
           isHidden: false,
           stdin: { not: null },
+          isValid: true,
         },
         orderBy: { order: "asc" },
         take: 5,

@@ -43,6 +43,9 @@ model Problem {
 
   canSubmit Boolean @default(true)
 
+  judgeMode  JudgeMode @default(NORMALIZED)
+  checkerKey String?
+
   timeLimitMs   Int @default(1000)
   memoryLimitKb Int @default(262144)
 
@@ -102,6 +105,11 @@ model TestCase {
   expected  String
   isHidden  Boolean @default(true)
   order     Int
+
+  // Flagged-out test cases (e.g. inputs that violate the problem's int
+  // contract). Kept for reference but excluded from judging via isValid.
+  isValid       Boolean @default(true)
+  invalidReason String?
 
   problem           Problem            @relation(fields: [problemId], references: [id])
   submissionResults SubmissionResult[]
@@ -275,6 +283,18 @@ enum SubmissionStatus {
   MEMORY_LIMIT_EXCEEDED
   RUNTIME_ERROR
   COMPILE_ERROR
+}
+
+// How a submission's output is judged for a problem.
+// NORMALIZED = structural compare with tolerances (default)
+// EXACT      = trimmed string equality
+// CHECKER    = semantic validation via checkerKey (multiple valid answers)
+// UNSUPPORTED = not submittable (canSubmit derives false)
+enum JudgeMode {
+  EXACT
+  NORMALIZED
+  CHECKER
+  UNSUPPORTED
 }
 
 enum ProgressStatus {

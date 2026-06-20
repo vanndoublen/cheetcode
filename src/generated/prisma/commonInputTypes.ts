@@ -116,6 +116,13 @@ export type BoolFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
 }
 
+export type EnumJudgeModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.JudgeMode | Prisma.EnumJudgeModeFieldRefInput<$PrismaModel>
+  in?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJudgeModeFilter<$PrismaModel> | $Enums.JudgeMode
+}
+
 export type IntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -166,6 +173,16 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type EnumJudgeModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JudgeMode | Prisma.EnumJudgeModeFieldRefInput<$PrismaModel>
+  in?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJudgeModeWithAggregatesFilter<$PrismaModel> | $Enums.JudgeMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJudgeModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJudgeModeFilter<$PrismaModel>
 }
 
 export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -397,6 +414,13 @@ export type NestedBoolFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
 }
 
+export type NestedEnumJudgeModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.JudgeMode | Prisma.EnumJudgeModeFieldRefInput<$PrismaModel>
+  in?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJudgeModeFilter<$PrismaModel> | $Enums.JudgeMode
+}
+
 export type NestedEnumDifficultyWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.Difficulty | Prisma.EnumDifficultyFieldRefInput<$PrismaModel>
   in?: $Enums.Difficulty[] | Prisma.ListEnumDifficultyFieldRefInput<$PrismaModel>
@@ -441,6 +465,16 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type NestedEnumJudgeModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.JudgeMode | Prisma.EnumJudgeModeFieldRefInput<$PrismaModel>
+  in?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.JudgeMode[] | Prisma.ListEnumJudgeModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumJudgeModeWithAggregatesFilter<$PrismaModel> | $Enums.JudgeMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumJudgeModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumJudgeModeFilter<$PrismaModel>
 }
 
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {

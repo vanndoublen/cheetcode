@@ -25,7 +25,7 @@ export const TestRunPanel = ({ problemSlug, sourceCode, language }: { problemSlu
 
     const runtestMutate = useMutation(trpc.submissions.run.mutationOptions({
         onSuccess(data) {
-            data.results.every((t) => t.passed === true && setSuccessCases((prev) => [...prev, t.testCaseId]));
+            setSuccessCases(data.results.filter((t) => t.passed).map((t) => t.testCaseId));
             setRunResults(data);
             setIsRanTest(true);
         }

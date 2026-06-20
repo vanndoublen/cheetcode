@@ -11,7 +11,7 @@ def parse_input_to_stdin(input_str: str) -> str:
         dict_str = re.sub(r'(\w+)\s*=\s*', r'"\1": ', cleaned)
         dict_str = "{" + dict_str + "}"
         parsed = ast.literal_eval(dict_str)
-        lines = [str(v) for v in parsed.values()]
+        lines = [repr(v) for v in parsed.values()]
         return "\n".join(lines)
     except:
         # fallback: just extract quoted strings or bare values

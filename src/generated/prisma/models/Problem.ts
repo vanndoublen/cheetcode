@@ -50,6 +50,8 @@ export type ProblemMinAggregateOutputType = {
   externalId: string | null
   frontendId: string | null
   canSubmit: boolean | null
+  judgeMode: $Enums.JudgeMode | null
+  checkerKey: string | null
   timeLimitMs: number | null
   memoryLimitKb: number | null
   isPublished: boolean | null
@@ -73,6 +75,8 @@ export type ProblemMaxAggregateOutputType = {
   externalId: string | null
   frontendId: string | null
   canSubmit: boolean | null
+  judgeMode: $Enums.JudgeMode | null
+  checkerKey: string | null
   timeLimitMs: number | null
   memoryLimitKb: number | null
   isPublished: boolean | null
@@ -96,6 +100,8 @@ export type ProblemCountAggregateOutputType = {
   externalId: number
   frontendId: number
   canSubmit: number
+  judgeMode: number
+  checkerKey: number
   timeLimitMs: number
   memoryLimitKb: number
   isPublished: number
@@ -131,6 +137,8 @@ export type ProblemMinAggregateInputType = {
   externalId?: true
   frontendId?: true
   canSubmit?: true
+  judgeMode?: true
+  checkerKey?: true
   timeLimitMs?: true
   memoryLimitKb?: true
   isPublished?: true
@@ -154,6 +162,8 @@ export type ProblemMaxAggregateInputType = {
   externalId?: true
   frontendId?: true
   canSubmit?: true
+  judgeMode?: true
+  checkerKey?: true
   timeLimitMs?: true
   memoryLimitKb?: true
   isPublished?: true
@@ -177,6 +187,8 @@ export type ProblemCountAggregateInputType = {
   externalId?: true
   frontendId?: true
   canSubmit?: true
+  judgeMode?: true
+  checkerKey?: true
   timeLimitMs?: true
   memoryLimitKb?: true
   isPublished?: true
@@ -287,6 +299,8 @@ export type ProblemGroupByOutputType = {
   externalId: string | null
   frontendId: string | null
   canSubmit: boolean
+  judgeMode: $Enums.JudgeMode
+  checkerKey: string | null
   timeLimitMs: number
   memoryLimitKb: number
   isPublished: boolean
@@ -333,6 +347,8 @@ export type ProblemWhereInput = {
   externalId?: Prisma.StringNullableFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableFilter<"Problem"> | string | null
   canSubmit?: Prisma.BoolFilter<"Problem"> | boolean
+  judgeMode?: Prisma.EnumJudgeModeFilter<"Problem"> | $Enums.JudgeMode
+  checkerKey?: Prisma.StringNullableFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntFilter<"Problem"> | number
   memoryLimitKb?: Prisma.IntFilter<"Problem"> | number
   isPublished?: Prisma.BoolFilter<"Problem"> | boolean
@@ -366,6 +382,8 @@ export type ProblemOrderByWithRelationInput = {
   externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   frontendId?: Prisma.SortOrderInput | Prisma.SortOrder
   canSubmit?: Prisma.SortOrder
+  judgeMode?: Prisma.SortOrder
+  checkerKey?: Prisma.SortOrderInput | Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -402,6 +420,8 @@ export type ProblemWhereUniqueInput = Prisma.AtLeast<{
   externalId?: Prisma.StringNullableFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableFilter<"Problem"> | string | null
   canSubmit?: Prisma.BoolFilter<"Problem"> | boolean
+  judgeMode?: Prisma.EnumJudgeModeFilter<"Problem"> | $Enums.JudgeMode
+  checkerKey?: Prisma.StringNullableFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntFilter<"Problem"> | number
   memoryLimitKb?: Prisma.IntFilter<"Problem"> | number
   isPublished?: Prisma.BoolFilter<"Problem"> | boolean
@@ -435,6 +455,8 @@ export type ProblemOrderByWithAggregationInput = {
   externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   frontendId?: Prisma.SortOrderInput | Prisma.SortOrder
   canSubmit?: Prisma.SortOrder
+  judgeMode?: Prisma.SortOrder
+  checkerKey?: Prisma.SortOrderInput | Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -466,6 +488,8 @@ export type ProblemScalarWhereWithAggregatesInput = {
   externalId?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   canSubmit?: Prisma.BoolWithAggregatesFilter<"Problem"> | boolean
+  judgeMode?: Prisma.EnumJudgeModeWithAggregatesFilter<"Problem"> | $Enums.JudgeMode
+  checkerKey?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntWithAggregatesFilter<"Problem"> | number
   memoryLimitKb?: Prisma.IntWithAggregatesFilter<"Problem"> | number
   isPublished?: Prisma.BoolWithAggregatesFilter<"Problem"> | boolean
@@ -489,6 +513,8 @@ export type ProblemCreateInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -521,6 +547,8 @@ export type ProblemUncheckedCreateInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -553,6 +581,8 @@ export type ProblemUpdateInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -585,6 +615,8 @@ export type ProblemUncheckedUpdateInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -617,6 +649,8 @@ export type ProblemCreateManyInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -640,6 +674,8 @@ export type ProblemUpdateManyMutationInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -662,6 +698,8 @@ export type ProblemUncheckedUpdateManyInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -685,6 +723,8 @@ export type ProblemCountOrderByAggregateInput = {
   externalId?: Prisma.SortOrder
   frontendId?: Prisma.SortOrder
   canSubmit?: Prisma.SortOrder
+  judgeMode?: Prisma.SortOrder
+  checkerKey?: Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -713,6 +753,8 @@ export type ProblemMaxOrderByAggregateInput = {
   externalId?: Prisma.SortOrder
   frontendId?: Prisma.SortOrder
   canSubmit?: Prisma.SortOrder
+  judgeMode?: Prisma.SortOrder
+  checkerKey?: Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -736,6 +778,8 @@ export type ProblemMinOrderByAggregateInput = {
   externalId?: Prisma.SortOrder
   frontendId?: Prisma.SortOrder
   canSubmit?: Prisma.SortOrder
+  judgeMode?: Prisma.SortOrder
+  checkerKey?: Prisma.SortOrder
   timeLimitMs?: Prisma.SortOrder
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -775,6 +819,10 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type EnumJudgeModeFieldUpdateOperationsInput = {
+  set?: $Enums.JudgeMode
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -967,6 +1015,8 @@ export type ProblemCreateWithoutCategoryInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -998,6 +1048,8 @@ export type ProblemUncheckedCreateWithoutCategoryInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1058,6 +1110,8 @@ export type ProblemScalarWhereInput = {
   externalId?: Prisma.StringNullableFilter<"Problem"> | string | null
   frontendId?: Prisma.StringNullableFilter<"Problem"> | string | null
   canSubmit?: Prisma.BoolFilter<"Problem"> | boolean
+  judgeMode?: Prisma.EnumJudgeModeFilter<"Problem"> | $Enums.JudgeMode
+  checkerKey?: Prisma.StringNullableFilter<"Problem"> | string | null
   timeLimitMs?: Prisma.IntFilter<"Problem"> | number
   memoryLimitKb?: Prisma.IntFilter<"Problem"> | number
   isPublished?: Prisma.BoolFilter<"Problem"> | boolean
@@ -1081,6 +1135,8 @@ export type ProblemCreateWithoutTagsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1112,6 +1168,8 @@ export type ProblemUncheckedCreateWithoutTagsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1159,6 +1217,8 @@ export type ProblemUpdateWithoutTagsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1190,6 +1250,8 @@ export type ProblemUncheckedUpdateWithoutTagsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1221,6 +1283,8 @@ export type ProblemCreateWithoutTestCasesInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1252,6 +1316,8 @@ export type ProblemUncheckedCreateWithoutTestCasesInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1299,6 +1365,8 @@ export type ProblemUpdateWithoutTestCasesInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1330,6 +1398,8 @@ export type ProblemUncheckedUpdateWithoutTestCasesInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1361,6 +1431,8 @@ export type ProblemCreateWithoutSnippetsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1392,6 +1464,8 @@ export type ProblemUncheckedCreateWithoutSnippetsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1439,6 +1513,8 @@ export type ProblemUpdateWithoutSnippetsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1470,6 +1546,8 @@ export type ProblemUncheckedUpdateWithoutSnippetsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1501,6 +1579,8 @@ export type ProblemCreateWithoutSubmissionsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1532,6 +1612,8 @@ export type ProblemUncheckedCreateWithoutSubmissionsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1579,6 +1661,8 @@ export type ProblemUpdateWithoutSubmissionsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1610,6 +1694,8 @@ export type ProblemUncheckedUpdateWithoutSubmissionsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1641,6 +1727,8 @@ export type ProblemCreateWithoutUserProblemProgressesInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1672,6 +1760,8 @@ export type ProblemUncheckedCreateWithoutUserProblemProgressesInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1719,6 +1809,8 @@ export type ProblemUpdateWithoutUserProblemProgressesInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1750,6 +1842,8 @@ export type ProblemUncheckedUpdateWithoutUserProblemProgressesInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1781,6 +1875,8 @@ export type ProblemCreateWithoutUserCodeDraftsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1812,6 +1908,8 @@ export type ProblemUncheckedCreateWithoutUserCodeDraftsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1859,6 +1957,8 @@ export type ProblemUpdateWithoutUserCodeDraftsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1890,6 +1990,8 @@ export type ProblemUncheckedUpdateWithoutUserCodeDraftsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1921,6 +2023,8 @@ export type ProblemCreateWithoutExamplesInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1952,6 +2056,8 @@ export type ProblemUncheckedCreateWithoutExamplesInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -1999,6 +2105,8 @@ export type ProblemUpdateWithoutExamplesInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2030,6 +2138,8 @@ export type ProblemUncheckedUpdateWithoutExamplesInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2061,6 +2171,8 @@ export type ProblemCreateWithoutHintsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -2092,6 +2204,8 @@ export type ProblemUncheckedCreateWithoutHintsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -2139,6 +2253,8 @@ export type ProblemUpdateWithoutHintsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2170,6 +2286,8 @@ export type ProblemUncheckedUpdateWithoutHintsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2201,6 +2319,8 @@ export type ProblemCreateWithoutFollowUpsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -2232,6 +2352,8 @@ export type ProblemUncheckedCreateWithoutFollowUpsInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -2279,6 +2401,8 @@ export type ProblemUpdateWithoutFollowUpsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2310,6 +2434,8 @@ export type ProblemUncheckedUpdateWithoutFollowUpsInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2341,6 +2467,8 @@ export type ProblemCreateManyCategoryInput = {
   externalId?: string | null
   frontendId?: string | null
   canSubmit?: boolean
+  judgeMode?: $Enums.JudgeMode
+  checkerKey?: string | null
   timeLimitMs?: number
   memoryLimitKb?: number
   isPublished?: boolean
@@ -2363,6 +2491,8 @@ export type ProblemUpdateWithoutCategoryInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2394,6 +2524,8 @@ export type ProblemUncheckedUpdateWithoutCategoryInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2425,6 +2557,8 @@ export type ProblemUncheckedUpdateManyWithoutCategoryInput = {
   externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
+  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2550,6 +2684,8 @@ export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   externalId?: boolean
   frontendId?: boolean
   canSubmit?: boolean
+  judgeMode?: boolean
+  checkerKey?: boolean
   timeLimitMs?: boolean
   memoryLimitKb?: boolean
   isPublished?: boolean
@@ -2584,6 +2720,8 @@ export type ProblemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   externalId?: boolean
   frontendId?: boolean
   canSubmit?: boolean
+  judgeMode?: boolean
+  checkerKey?: boolean
   timeLimitMs?: boolean
   memoryLimitKb?: boolean
   isPublished?: boolean
@@ -2608,6 +2746,8 @@ export type ProblemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   externalId?: boolean
   frontendId?: boolean
   canSubmit?: boolean
+  judgeMode?: boolean
+  checkerKey?: boolean
   timeLimitMs?: boolean
   memoryLimitKb?: boolean
   isPublished?: boolean
@@ -2632,6 +2772,8 @@ export type ProblemSelectScalar = {
   externalId?: boolean
   frontendId?: boolean
   canSubmit?: boolean
+  judgeMode?: boolean
+  checkerKey?: boolean
   timeLimitMs?: boolean
   memoryLimitKb?: boolean
   isPublished?: boolean
@@ -2641,7 +2783,7 @@ export type ProblemSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProblemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "difficulty" | "description" | "constraints" | "solution" | "entryPoint" | "inputSignature" | "outputSignature" | "externalId" | "frontendId" | "canSubmit" | "timeLimitMs" | "memoryLimitKb" | "isPublished" | "isPremium" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+export type ProblemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "difficulty" | "description" | "constraints" | "solution" | "entryPoint" | "inputSignature" | "outputSignature" | "externalId" | "frontendId" | "canSubmit" | "judgeMode" | "checkerKey" | "timeLimitMs" | "memoryLimitKb" | "isPublished" | "isPremium" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
 export type ProblemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.Problem$categoryArgs<ExtArgs>
   testCases?: boolean | Prisma.Problem$testCasesArgs<ExtArgs>
@@ -2690,6 +2832,8 @@ export type $ProblemPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     externalId: string | null
     frontendId: string | null
     canSubmit: boolean
+    judgeMode: $Enums.JudgeMode
+    checkerKey: string | null
     timeLimitMs: number
     memoryLimitKb: number
     isPublished: boolean
@@ -3143,6 +3287,8 @@ export interface ProblemFieldRefs {
   readonly externalId: Prisma.FieldRef<"Problem", 'String'>
   readonly frontendId: Prisma.FieldRef<"Problem", 'String'>
   readonly canSubmit: Prisma.FieldRef<"Problem", 'Boolean'>
+  readonly judgeMode: Prisma.FieldRef<"Problem", 'JudgeMode'>
+  readonly checkerKey: Prisma.FieldRef<"Problem", 'String'>
   readonly timeLimitMs: Prisma.FieldRef<"Problem", 'Int'>
   readonly memoryLimitKb: Prisma.FieldRef<"Problem", 'Int'>
   readonly isPublished: Prisma.FieldRef<"Problem", 'Boolean'>

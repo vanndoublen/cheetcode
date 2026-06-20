@@ -109,6 +109,8 @@ export const ProblemScalarFieldEnum = {
   externalId: 'externalId',
   frontendId: 'frontendId',
   canSubmit: 'canSubmit',
+  judgeMode: 'judgeMode',
+  checkerKey: 'checkerKey',
   timeLimitMs: 'timeLimitMs',
   memoryLimitKb: 'memoryLimitKb',
   isPublished: 'isPublished',
@@ -152,7 +154,9 @@ export const TestCaseScalarFieldEnum = {
   stdin: 'stdin',
   expected: 'expected',
   isHidden: 'isHidden',
-  order: 'order'
+  order: 'order',
+  isValid: 'isValid',
+  invalidReason: 'invalidReason'
 } as const
 
 export type TestCaseScalarFieldEnum = (typeof TestCaseScalarFieldEnum)[keyof typeof TestCaseScalarFieldEnum]
