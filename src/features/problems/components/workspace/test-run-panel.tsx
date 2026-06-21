@@ -52,7 +52,7 @@ export const TestRunPanel = ({ problemSlug, sourceCode, language }: { problemSlu
             <div className="flex px-3 py-2 justify-between items-center border-b">
                 <div className="flex text-xs">
                     {data?.map((t, i) => (
-                        <div
+                        <button
                             key={i}
                             onClick={() => setTab(i)}
                             className={cn("py-1 px-8 cursor-pointer flex items-center justify-center gap-2",
@@ -68,7 +68,7 @@ export const TestRunPanel = ({ problemSlug, sourceCode, language }: { problemSlu
                                 (<HugeiconsIcon icon={CheckCircle} strokeWidth={2} className="size-3 text-blue-400" />) :
                                 (isRanTest && <HugeiconsIcon icon={BadgeX} strokeWidth={2} className="size-3 text-red-400" />)
                             }
-                        </div>
+                        </button>
                     ))}
                 </div>
                 <Button

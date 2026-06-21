@@ -1,19 +1,10 @@
-import { ProblemWorkspaceView } from "@/features/problems/components/workspace/problem-workspace-view";
-import { prefetchProblemWorkspace } from "@/features/problems/server/prefetch";
+import { redirect } from 'next/navigation'
 
-interface Props {
-    params: Promise<{
-        problemSlug: string;
-    }>
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ problemSlug: string }>
+}) {
+    const { problemSlug } = await params
+    redirect(`/problems/${problemSlug}/descriptions`)
 }
-
-const Page = async ({ params }: Props) => {
-    const { problemSlug } = await params;
-    prefetchProblemWorkspace(problemSlug);
-
-    return (
-        <ProblemWorkspaceView slug={problemSlug} />
-    )
-}
-
-export default Page;
