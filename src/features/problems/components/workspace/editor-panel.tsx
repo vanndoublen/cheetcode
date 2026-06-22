@@ -196,7 +196,15 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         } else {
             monaco.editor.setTheme("vs");
         }
-    }, [theme])
+    }, [theme]);
+
+    useEffect(() => {
+        const handleBlur = () => {
+            draftMutate.mutate({ problemId: data?.id || "", language: selectedLanguage, code });
+        };
+        document.addEventListener("visibilitychange", handleBlur);
+        return () => document.removeEventListener("visibilitychange", handleBlur);
+    }, [code, selectedLanguage]); // re-attach when these change so closure has latest values
 
     if (!data) return null;
 
@@ -252,7 +260,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                             <ResultDialog open={isResultDialogOpen} onOpenChange={setIsResultDialogOpen} data={submissionsMutate.data} />
                         )}
                     </Allotment.Pane>
-                    
+
                     <Allotment.Pane>
                         <TestRunPanel problemSlug={slug} sourceCode={code} language={selectedLanguage} />
                     </Allotment.Pane>

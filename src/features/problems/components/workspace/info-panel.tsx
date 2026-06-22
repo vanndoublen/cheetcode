@@ -24,6 +24,7 @@ export const InfoPanel = ({ children }: { children: React.ReactNode }) => {
                 >
                     Descriptions
                 </button>
+
                 <button
                     className={cn("py-1 px-8 cursor-pointer flex items-center justify-center gap-2",
                         name === "solutions" ?
@@ -33,6 +34,17 @@ export const InfoPanel = ({ children }: { children: React.ReactNode }) => {
                     onClick={() => router.push(`/problems/${problemSlug}/solutions`)}
                 >
                     Solutions
+                </button>
+
+                <button
+                    className={cn("py-1 px-8 cursor-pointer flex items-center justify-center gap-2",
+                        name === "submissions" ?
+                            "bg-muted" :
+                            "text-muted-foreground bg-transparent ",
+                    )}
+                    onClick={() => router.push(`/problems/${problemSlug}/submissions`)}
+                >
+                    Submissions
                 </button>
             </div>
             <div className="flex-1 overflow-auto p-4">

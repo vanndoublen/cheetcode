@@ -85,8 +85,7 @@ const createScript = async (
     },
   });
 
-
-    if (!problem || !problem.snippets[0]?.entryPoint) {
+  if (!problem || !problem.snippets[0]?.entryPoint) {
     throw new Error(`Problem not found or missing entry point: ${problemSlug}`);
   }
 
@@ -222,9 +221,7 @@ const runJudge0 = async (batchSize: number, submissions: Judge0Input[]) => {
     ? Math.round(ranTimes.reduce((a, b) => a + b, 0) / ranTimes.length)
     : null;
 
-  const memoryKbs = allResults
-    .filter((r) => r.memory)
-    .map((r) => r.memory!);
+  const memoryKbs = allResults.filter((r) => r.memory).map((r) => r.memory!);
   const avgMemoryKb = memoryKbs.length
     ? Math.round(memoryKbs.reduce((a, b) => a + b, 0) / memoryKbs.length)
     : null;
@@ -298,15 +295,16 @@ export const submissionsRouter = createTRPCRouter({
         );
 
         // Decide correctness in-app for each executed test case.
-        const passedFlags = allResults.map((r, i) =>
-          r.status.id === 3 &&
-          judge({
-            mode: judgeMode,
-            expected: testCases[i].expected,
-            actual: r.stdout ?? "",
-            stdin: testCases[i].stdin ?? "",
-            checkerKey,
-          }),
+        const passedFlags = allResults.map(
+          (r, i) =>
+            r.status.id === 3 &&
+            judge({
+              mode: judgeMode,
+              expected: testCases[i].expected,
+              actual: r.stdout ?? "",
+              stdin: testCases[i].stdin ?? "",
+              checkerKey,
+            }),
         );
         const status = aggregateStatus(allResults, passedFlags);
 
@@ -434,5 +432,33 @@ export const submissionsRouter = createTRPCRouter({
         take: 5,
       });
       return testCases;
+    }),
+
+  getAll: protectedProcedure
+    .input(
+      z.object({
+        problemSlug: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const user = await prisma.user.findUnique({
+        where: { clerkId: ctx.auth.userId },
+      });
+
+      if (!user)
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "No user found" });
+
+      const submissions = await prisma.submission.findMany({
+        where: {
+          problem: { slug: input.problemSlug },
+          userId: user.id,
+        },
+        orderBy: { createdAt: "desc" },
+        include: {
+          results: true,
+        },
+      });
+
+      return submissions; 
     }),
 });
