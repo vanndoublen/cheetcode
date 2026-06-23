@@ -1,10 +1,10 @@
 "use client";
 
-import { useDebugValue, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Monokai from "../../../../../node_modules/monaco-themes/themes/Monokai.json";
 import dynamic from "next/dynamic";
 import { type Monaco } from "@monaco-editor/react";
-import { languages, type editor } from "monaco-editor";
+import { type editor } from "monaco-editor";
 import { useTheme } from "next-themes";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useProblemWorkspace } from "../../hooks/use-problems";
@@ -12,30 +12,16 @@ import { Language } from "@/generated/prisma/enums";
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "sonner";
+
 import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
-import { useUserCodeDraft } from "@/features/drafts/hooks/use-code-draft";
 import { ResultDialog } from "@/features/submissions/components/result-dialog";
-import { Submission } from "@/generated/prisma/client";
+
 import { Allotment } from "allotment";
 import { TestRunPanel } from "./test-run-panel";
 import "allotment/dist/style.css"
+import { getLanguageDisplayName } from "../../utils";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
-
-function cssVarToRGB(name: string) {
-    const value = getComputedStyle(document.documentElement)
-        .getPropertyValue(name)
-        .trim();
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) return "#000000";
-
-    ctx.fillStyle = value;        // browser converts color
-    return ctx.fillStyle;         // returns rgb/hex
-}
 
 function cssVarToHex(name: string) {
     const value = getComputedStyle(document.documentElement)
@@ -79,33 +65,35 @@ const LANGUAGE_MAP: Record<Language, string> = {
 };
 
 export const EditorPanel = ({ slug }: { slug: string }) => {
-    const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
-    const monacoRef = useRef<Monaco | null>(null);
     const { theme } = useTheme();
+    const trpc = useTRPC();
+
 
     const { data } = useProblemWorkspace(slug);
+    const { data: supportedLanguages } = useQuery(
+        trpc.submissions.getSupportedLanguages.queryOptions({ problemSlug: slug })
+    );
+
 
     const snippets = data?.snippets ?? [];
-    const [selectedLanguage, setSelectedLanguage] = useState<Language>(
-        snippets[0]?.language ?? "PYTHON3"
-    );
 
-    const trpcClient = useTRPC();
-    const { data: supportedLanguages } = useQuery(
-        trpcClient.submissions.getSupportedLanguages.queryOptions({ problemSlug: slug })
-    );
     // Only offer languages whose driver can actually run this problem's signature.
     const visibleSnippets = supportedLanguages
         ? snippets.filter((s) => supportedLanguages.includes(s.language))
         : snippets;
-
+    const [selectedLanguage, setSelectedLanguage] = useState<Language>(
+        snippets[0]?.language ?? "PYTHON3"
+    );
     const snippet = snippets.find(s => s.language == selectedLanguage);
 
-    const userCodeDraft = useUserCodeDraft(data?.id ?? "", selectedLanguage);
+
+    const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
 
     const [code, setCode] = useState(snippet?.template || DEFAULT_TEMPLATE);
 
-    const trpc = useTRPC();
+    const monacoRef = useRef<Monaco | null>(null);
+
+
     const submissionsMutate = useMutation(trpc.submissions.run.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
@@ -118,14 +106,6 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         }
     ));
 
-    const draftMutate = useMutation(trpc.userCodeDrafts.create.mutationOptions(
-        {
-            onSuccess(data) {
-                // console.log(data);
-            }
-        }
-    ));
-
 
     const handleSubmit = async (
         problemSlug: string,
@@ -133,12 +113,6 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         language: string,
         isHidden: boolean,
     ) => {
-
-        draftMutate.mutate({
-            problemId: data?.id ?? "",
-            language: selectedLanguage,
-            code: code,
-        })
 
         await submissionsMutate.mutateAsync({
             problemSlug,
@@ -176,16 +150,15 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     }
 
     const handleLanguageChange = (lang: Language) => {
-        draftMutate.mutate({ problemId: data?.id || "", language: selectedLanguage, code });
         setSelectedLanguage(lang);
     }
 
     useEffect(() => {
-        const draft = userCodeDraft.data?.code;
-        const template = snippets.find(s => s.language === selectedLanguage)?.template ?? DEFAULT_TEMPLATE;
-        setCode(draft ?? template);
 
-    }, [userCodeDraft.data, selectedLanguage]);
+        const saved = localStorage.getItem(`${slug}_${selectedLanguage}_code`);
+        const template = snippets.find(s => s.language === selectedLanguage)?.template ?? DEFAULT_TEMPLATE;
+        setCode(saved ?? template);
+    }, [selectedLanguage]);
 
     useEffect(() => {
         if (!monacoRef.current) return;
@@ -198,13 +171,6 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
         }
     }, [theme]);
 
-    useEffect(() => {
-        const handleBlur = () => {
-            draftMutate.mutate({ problemId: data?.id || "", language: selectedLanguage, code });
-        };
-        document.addEventListener("visibilitychange", handleBlur);
-        return () => document.removeEventListener("visibilitychange", handleBlur);
-    }, [code, selectedLanguage]); // re-attach when these change so closure has latest values
 
     if (!data) return null;
 
@@ -223,7 +189,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                     <SelectContent>
                         {visibleSnippets.map(s => (
                             <SelectItem key={s.language} value={s.language} className="text-xs">
-                                {s.language}
+                                {getLanguageDisplayName(s.language)}
                             </SelectItem>
                         ))}
                     </SelectContent>
@@ -244,7 +210,10 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
                             value={code}
                             defaultValue={code}
                             language={LANGUAGE_MAP[selectedLanguage] ?? "plaintext"}
-                            onChange={(value) => setCode(value ?? "")}
+                            onChange={(value) => {
+                                setCode(value ?? "");
+                                localStorage.setItem(`${slug}_${selectedLanguage}_code`, value ?? "");
+                            }}
                             onMount={handleEditorMount}
                             options={{
                                 minimap: { enabled: false },

@@ -62,7 +62,6 @@ export const ModelName = {
   Submission: 'Submission',
   SubmissionResult: 'SubmissionResult',
   UserProblemProgress: 'UserProblemProgress',
-  UserCodeDraft: 'UserCodeDraft',
   Example: 'Example',
   Hint: 'Hint',
   FollowUp: 'FollowUp'
@@ -226,17 +225,6 @@ export const UserProblemProgressScalarFieldEnum = {
 } as const
 
 export type UserProblemProgressScalarFieldEnum = (typeof UserProblemProgressScalarFieldEnum)[keyof typeof UserProblemProgressScalarFieldEnum]
-
-
-export const UserCodeDraftScalarFieldEnum = {
-  userId: 'userId',
-  problemId: 'problemId',
-  language: 'language',
-  code: 'code',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserCodeDraftScalarFieldEnum = (typeof UserCodeDraftScalarFieldEnum)[keyof typeof UserCodeDraftScalarFieldEnum]
 
 
 export const ExampleScalarFieldEnum = {

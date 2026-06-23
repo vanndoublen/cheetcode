@@ -280,7 +280,7 @@ export const submissionsRouter = createTRPCRouter({
             isValid: true,
           },
           orderBy: { order: "asc" },
-          take: 10,
+          take: 30,
         });
 
         const submissions = testCases.map((t) => ({

@@ -365,7 +365,6 @@ export type ProblemWhereInput = {
   examples?: Prisma.ExampleListRelationFilter
   hints?: Prisma.HintListRelationFilter
   followUps?: Prisma.FollowUpListRelationFilter
-  userCodeDrafts?: Prisma.UserCodeDraftListRelationFilter
 }
 
 export type ProblemOrderByWithRelationInput = {
@@ -400,7 +399,6 @@ export type ProblemOrderByWithRelationInput = {
   examples?: Prisma.ExampleOrderByRelationAggregateInput
   hints?: Prisma.HintOrderByRelationAggregateInput
   followUps?: Prisma.FollowUpOrderByRelationAggregateInput
-  userCodeDrafts?: Prisma.UserCodeDraftOrderByRelationAggregateInput
 }
 
 export type ProblemWhereUniqueInput = Prisma.AtLeast<{
@@ -438,7 +436,6 @@ export type ProblemWhereUniqueInput = Prisma.AtLeast<{
   examples?: Prisma.ExampleListRelationFilter
   hints?: Prisma.HintListRelationFilter
   followUps?: Prisma.FollowUpListRelationFilter
-  userCodeDrafts?: Prisma.UserCodeDraftListRelationFilter
 }, "id" | "slug">
 
 export type ProblemOrderByWithAggregationInput = {
@@ -530,7 +527,6 @@ export type ProblemCreateInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateInput = {
@@ -564,7 +560,6 @@ export type ProblemUncheckedCreateInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUpdateInput = {
@@ -598,7 +593,6 @@ export type ProblemUpdateInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateInput = {
@@ -632,7 +626,6 @@ export type ProblemUncheckedUpdateInput = {
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateManyInput = {
@@ -945,20 +938,6 @@ export type ProblemUpdateOneRequiredWithoutUserProblemProgressesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProblemUpdateToOneWithWhereWithoutUserProblemProgressesInput, Prisma.ProblemUpdateWithoutUserProblemProgressesInput>, Prisma.ProblemUncheckedUpdateWithoutUserProblemProgressesInput>
 }
 
-export type ProblemCreateNestedOneWithoutUserCodeDraftsInput = {
-  create?: Prisma.XOR<Prisma.ProblemCreateWithoutUserCodeDraftsInput, Prisma.ProblemUncheckedCreateWithoutUserCodeDraftsInput>
-  connectOrCreate?: Prisma.ProblemCreateOrConnectWithoutUserCodeDraftsInput
-  connect?: Prisma.ProblemWhereUniqueInput
-}
-
-export type ProblemUpdateOneRequiredWithoutUserCodeDraftsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProblemCreateWithoutUserCodeDraftsInput, Prisma.ProblemUncheckedCreateWithoutUserCodeDraftsInput>
-  connectOrCreate?: Prisma.ProblemCreateOrConnectWithoutUserCodeDraftsInput
-  upsert?: Prisma.ProblemUpsertWithoutUserCodeDraftsInput
-  connect?: Prisma.ProblemWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProblemUpdateToOneWithWhereWithoutUserCodeDraftsInput, Prisma.ProblemUpdateWithoutUserCodeDraftsInput>, Prisma.ProblemUncheckedUpdateWithoutUserCodeDraftsInput>
-}
-
 export type ProblemCreateNestedOneWithoutExamplesInput = {
   create?: Prisma.XOR<Prisma.ProblemCreateWithoutExamplesInput, Prisma.ProblemUncheckedCreateWithoutExamplesInput>
   connectOrCreate?: Prisma.ProblemCreateOrConnectWithoutExamplesInput
@@ -1031,7 +1010,6 @@ export type ProblemCreateWithoutCategoryInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutCategoryInput = {
@@ -1064,7 +1042,6 @@ export type ProblemUncheckedCreateWithoutCategoryInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutCategoryInput = {
@@ -1151,7 +1128,6 @@ export type ProblemCreateWithoutTagsInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutTagsInput = {
@@ -1184,7 +1160,6 @@ export type ProblemUncheckedCreateWithoutTagsInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutTagsInput = {
@@ -1233,7 +1208,6 @@ export type ProblemUpdateWithoutTagsInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutTagsInput = {
@@ -1266,7 +1240,6 @@ export type ProblemUncheckedUpdateWithoutTagsInput = {
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateWithoutTestCasesInput = {
@@ -1299,7 +1272,6 @@ export type ProblemCreateWithoutTestCasesInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutTestCasesInput = {
@@ -1332,7 +1304,6 @@ export type ProblemUncheckedCreateWithoutTestCasesInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutTestCasesInput = {
@@ -1381,7 +1352,6 @@ export type ProblemUpdateWithoutTestCasesInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutTestCasesInput = {
@@ -1414,7 +1384,6 @@ export type ProblemUncheckedUpdateWithoutTestCasesInput = {
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateWithoutSnippetsInput = {
@@ -1447,7 +1416,6 @@ export type ProblemCreateWithoutSnippetsInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutSnippetsInput = {
@@ -1480,7 +1448,6 @@ export type ProblemUncheckedCreateWithoutSnippetsInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutSnippetsInput = {
@@ -1529,7 +1496,6 @@ export type ProblemUpdateWithoutSnippetsInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutSnippetsInput = {
@@ -1562,7 +1528,6 @@ export type ProblemUncheckedUpdateWithoutSnippetsInput = {
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateWithoutSubmissionsInput = {
@@ -1595,7 +1560,6 @@ export type ProblemCreateWithoutSubmissionsInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutSubmissionsInput = {
@@ -1628,7 +1592,6 @@ export type ProblemUncheckedCreateWithoutSubmissionsInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutSubmissionsInput = {
@@ -1677,7 +1640,6 @@ export type ProblemUpdateWithoutSubmissionsInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutSubmissionsInput = {
@@ -1710,7 +1672,6 @@ export type ProblemUncheckedUpdateWithoutSubmissionsInput = {
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateWithoutUserProblemProgressesInput = {
@@ -1743,7 +1704,6 @@ export type ProblemCreateWithoutUserProblemProgressesInput = {
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutUserProblemProgressesInput = {
@@ -1776,7 +1736,6 @@ export type ProblemUncheckedCreateWithoutUserProblemProgressesInput = {
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutUserProblemProgressesInput = {
@@ -1825,7 +1784,6 @@ export type ProblemUpdateWithoutUserProblemProgressesInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutUserProblemProgressesInput = {
@@ -1855,155 +1813,6 @@ export type ProblemUncheckedUpdateWithoutUserProblemProgressesInput = {
   snippets?: Prisma.CodeSnippetUncheckedUpdateManyWithoutProblemNestedInput
   tags?: Prisma.ProblemTagUncheckedUpdateManyWithoutProblemNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutProblemNestedInput
-  examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
-  hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
-  followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
-}
-
-export type ProblemCreateWithoutUserCodeDraftsInput = {
-  id?: string
-  title: string
-  slug: string
-  difficulty: $Enums.Difficulty
-  description: string
-  constraints?: string | null
-  solution?: string | null
-  entryPoint?: string | null
-  inputSignature?: string | null
-  outputSignature?: string | null
-  externalId?: string | null
-  frontendId?: string | null
-  canSubmit?: boolean
-  judgeMode?: $Enums.JudgeMode
-  checkerKey?: string | null
-  timeLimitMs?: number
-  memoryLimitKb?: number
-  isPublished?: boolean
-  isPremium?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
-  testCases?: Prisma.TestCaseCreateNestedManyWithoutProblemInput
-  snippets?: Prisma.CodeSnippetCreateNestedManyWithoutProblemInput
-  tags?: Prisma.ProblemTagCreateNestedManyWithoutProblemInput
-  submissions?: Prisma.SubmissionCreateNestedManyWithoutProblemInput
-  userProblemProgresses?: Prisma.UserProblemProgressCreateNestedManyWithoutProblemInput
-  examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
-  hints?: Prisma.HintCreateNestedManyWithoutProblemInput
-  followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-}
-
-export type ProblemUncheckedCreateWithoutUserCodeDraftsInput = {
-  id?: string
-  title: string
-  slug: string
-  difficulty: $Enums.Difficulty
-  description: string
-  constraints?: string | null
-  solution?: string | null
-  entryPoint?: string | null
-  inputSignature?: string | null
-  outputSignature?: string | null
-  externalId?: string | null
-  frontendId?: string | null
-  canSubmit?: boolean
-  judgeMode?: $Enums.JudgeMode
-  checkerKey?: string | null
-  timeLimitMs?: number
-  memoryLimitKb?: number
-  isPublished?: boolean
-  isPremium?: boolean
-  categoryId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  testCases?: Prisma.TestCaseUncheckedCreateNestedManyWithoutProblemInput
-  snippets?: Prisma.CodeSnippetUncheckedCreateNestedManyWithoutProblemInput
-  tags?: Prisma.ProblemTagUncheckedCreateNestedManyWithoutProblemInput
-  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutProblemInput
-  userProblemProgresses?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutProblemInput
-  examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
-  hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
-  followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-}
-
-export type ProblemCreateOrConnectWithoutUserCodeDraftsInput = {
-  where: Prisma.ProblemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProblemCreateWithoutUserCodeDraftsInput, Prisma.ProblemUncheckedCreateWithoutUserCodeDraftsInput>
-}
-
-export type ProblemUpsertWithoutUserCodeDraftsInput = {
-  update: Prisma.XOR<Prisma.ProblemUpdateWithoutUserCodeDraftsInput, Prisma.ProblemUncheckedUpdateWithoutUserCodeDraftsInput>
-  create: Prisma.XOR<Prisma.ProblemCreateWithoutUserCodeDraftsInput, Prisma.ProblemUncheckedCreateWithoutUserCodeDraftsInput>
-  where?: Prisma.ProblemWhereInput
-}
-
-export type ProblemUpdateToOneWithWhereWithoutUserCodeDraftsInput = {
-  where?: Prisma.ProblemWhereInput
-  data: Prisma.XOR<Prisma.ProblemUpdateWithoutUserCodeDraftsInput, Prisma.ProblemUncheckedUpdateWithoutUserCodeDraftsInput>
-}
-
-export type ProblemUpdateWithoutUserCodeDraftsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outputSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
-  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
-  memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
-  testCases?: Prisma.TestCaseUpdateManyWithoutProblemNestedInput
-  snippets?: Prisma.CodeSnippetUpdateManyWithoutProblemNestedInput
-  tags?: Prisma.ProblemTagUpdateManyWithoutProblemNestedInput
-  submissions?: Prisma.SubmissionUpdateManyWithoutProblemNestedInput
-  userProblemProgresses?: Prisma.UserProblemProgressUpdateManyWithoutProblemNestedInput
-  examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
-  hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
-  followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-}
-
-export type ProblemUncheckedUpdateWithoutUserCodeDraftsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  constraints?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  entryPoint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  outputSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  frontendId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  canSubmit?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  judgeMode?: Prisma.EnumJudgeModeFieldUpdateOperationsInput | $Enums.JudgeMode
-  checkerKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  timeLimitMs?: Prisma.IntFieldUpdateOperationsInput | number
-  memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  testCases?: Prisma.TestCaseUncheckedUpdateManyWithoutProblemNestedInput
-  snippets?: Prisma.CodeSnippetUncheckedUpdateManyWithoutProblemNestedInput
-  tags?: Prisma.ProblemTagUncheckedUpdateManyWithoutProblemNestedInput
-  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutProblemNestedInput
-  userProblemProgresses?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutProblemNestedInput
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
@@ -2039,7 +1848,6 @@ export type ProblemCreateWithoutExamplesInput = {
   userProblemProgresses?: Prisma.UserProblemProgressCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutExamplesInput = {
@@ -2072,7 +1880,6 @@ export type ProblemUncheckedCreateWithoutExamplesInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutExamplesInput = {
@@ -2121,7 +1928,6 @@ export type ProblemUpdateWithoutExamplesInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutExamplesInput = {
@@ -2154,7 +1960,6 @@ export type ProblemUncheckedUpdateWithoutExamplesInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateWithoutHintsInput = {
@@ -2187,7 +1992,6 @@ export type ProblemCreateWithoutHintsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressCreateNestedManyWithoutProblemInput
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutHintsInput = {
@@ -2220,7 +2024,6 @@ export type ProblemUncheckedCreateWithoutHintsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutProblemInput
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   followUps?: Prisma.FollowUpUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutHintsInput = {
@@ -2269,7 +2072,6 @@ export type ProblemUpdateWithoutHintsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUpdateManyWithoutProblemNestedInput
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutHintsInput = {
@@ -2302,7 +2104,6 @@ export type ProblemUncheckedUpdateWithoutHintsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutProblemNestedInput
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateWithoutFollowUpsInput = {
@@ -2335,7 +2136,6 @@ export type ProblemCreateWithoutFollowUpsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressCreateNestedManyWithoutProblemInput
   examples?: Prisma.ExampleCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemUncheckedCreateWithoutFollowUpsInput = {
@@ -2368,7 +2168,6 @@ export type ProblemUncheckedCreateWithoutFollowUpsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUncheckedCreateNestedManyWithoutProblemInput
   examples?: Prisma.ExampleUncheckedCreateNestedManyWithoutProblemInput
   hints?: Prisma.HintUncheckedCreateNestedManyWithoutProblemInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedCreateNestedManyWithoutProblemInput
 }
 
 export type ProblemCreateOrConnectWithoutFollowUpsInput = {
@@ -2417,7 +2216,6 @@ export type ProblemUpdateWithoutFollowUpsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUpdateManyWithoutProblemNestedInput
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutFollowUpsInput = {
@@ -2450,7 +2248,6 @@ export type ProblemUncheckedUpdateWithoutFollowUpsInput = {
   userProblemProgresses?: Prisma.UserProblemProgressUncheckedUpdateManyWithoutProblemNestedInput
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemCreateManyCategoryInput = {
@@ -2507,7 +2304,6 @@ export type ProblemUpdateWithoutCategoryInput = {
   examples?: Prisma.ExampleUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateWithoutCategoryInput = {
@@ -2540,7 +2336,6 @@ export type ProblemUncheckedUpdateWithoutCategoryInput = {
   examples?: Prisma.ExampleUncheckedUpdateManyWithoutProblemNestedInput
   hints?: Prisma.HintUncheckedUpdateManyWithoutProblemNestedInput
   followUps?: Prisma.FollowUpUncheckedUpdateManyWithoutProblemNestedInput
-  userCodeDrafts?: Prisma.UserCodeDraftUncheckedUpdateManyWithoutProblemNestedInput
 }
 
 export type ProblemUncheckedUpdateManyWithoutCategoryInput = {
@@ -2581,7 +2376,6 @@ export type ProblemCountOutputType = {
   examples: number
   hints: number
   followUps: number
-  userCodeDrafts: number
 }
 
 export type ProblemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2593,7 +2387,6 @@ export type ProblemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   examples?: boolean | ProblemCountOutputTypeCountExamplesArgs
   hints?: boolean | ProblemCountOutputTypeCountHintsArgs
   followUps?: boolean | ProblemCountOutputTypeCountFollowUpsArgs
-  userCodeDrafts?: boolean | ProblemCountOutputTypeCountUserCodeDraftsArgs
 }
 
 /**
@@ -2662,13 +2455,6 @@ export type ProblemCountOutputTypeCountFollowUpsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.FollowUpWhereInput
 }
 
-/**
- * ProblemCountOutputType without action
- */
-export type ProblemCountOutputTypeCountUserCodeDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserCodeDraftWhereInput
-}
-
 
 export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2702,7 +2488,6 @@ export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   examples?: boolean | Prisma.Problem$examplesArgs<ExtArgs>
   hints?: boolean | Prisma.Problem$hintsArgs<ExtArgs>
   followUps?: boolean | Prisma.Problem$followUpsArgs<ExtArgs>
-  userCodeDrafts?: boolean | Prisma.Problem$userCodeDraftsArgs<ExtArgs>
   _count?: boolean | Prisma.ProblemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["problem"]>
 
@@ -2794,7 +2579,6 @@ export type ProblemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   examples?: boolean | Prisma.Problem$examplesArgs<ExtArgs>
   hints?: boolean | Prisma.Problem$hintsArgs<ExtArgs>
   followUps?: boolean | Prisma.Problem$followUpsArgs<ExtArgs>
-  userCodeDrafts?: boolean | Prisma.Problem$userCodeDraftsArgs<ExtArgs>
   _count?: boolean | Prisma.ProblemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProblemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2816,7 +2600,6 @@ export type $ProblemPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     examples: Prisma.$ExamplePayload<ExtArgs>[]
     hints: Prisma.$HintPayload<ExtArgs>[]
     followUps: Prisma.$FollowUpPayload<ExtArgs>[]
-    userCodeDrafts: Prisma.$UserCodeDraftPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3244,7 +3027,6 @@ export interface Prisma__ProblemClient<T, Null = never, ExtArgs extends runtime.
   examples<T extends Prisma.Problem$examplesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Problem$examplesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamplePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hints<T extends Prisma.Problem$hintsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Problem$hintsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HintPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followUps<T extends Prisma.Problem$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Problem$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  userCodeDrafts<T extends Prisma.Problem$userCodeDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Problem$userCodeDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserCodeDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3900,30 +3682,6 @@ export type Problem$followUpsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.FollowUpScalarFieldEnum | Prisma.FollowUpScalarFieldEnum[]
-}
-
-/**
- * Problem.userCodeDrafts
- */
-export type Problem$userCodeDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserCodeDraft
-   */
-  select?: Prisma.UserCodeDraftSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserCodeDraft
-   */
-  omit?: Prisma.UserCodeDraftOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserCodeDraftInclude<ExtArgs> | null
-  where?: Prisma.UserCodeDraftWhereInput
-  orderBy?: Prisma.UserCodeDraftOrderByWithRelationInput | Prisma.UserCodeDraftOrderByWithRelationInput[]
-  cursor?: Prisma.UserCodeDraftWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserCodeDraftScalarFieldEnum | Prisma.UserCodeDraftScalarFieldEnum[]
 }
 
 /**
