@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Problem" ADD COLUMN     "isNeedCode75" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isNeetCode150" BOOLEAN NOT NULL DEFAULT false;

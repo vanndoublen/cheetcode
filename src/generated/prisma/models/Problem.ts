@@ -56,6 +56,8 @@ export type ProblemMinAggregateOutputType = {
   memoryLimitKb: number | null
   isPublished: boolean | null
   isPremium: boolean | null
+  isNeetCode75: boolean | null
+  isNeetCode150: boolean | null
   categoryId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -81,6 +83,8 @@ export type ProblemMaxAggregateOutputType = {
   memoryLimitKb: number | null
   isPublished: boolean | null
   isPremium: boolean | null
+  isNeetCode75: boolean | null
+  isNeetCode150: boolean | null
   categoryId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -106,6 +110,8 @@ export type ProblemCountAggregateOutputType = {
   memoryLimitKb: number
   isPublished: number
   isPremium: number
+  isNeetCode75: number
+  isNeetCode150: number
   categoryId: number
   createdAt: number
   updatedAt: number
@@ -143,6 +149,8 @@ export type ProblemMinAggregateInputType = {
   memoryLimitKb?: true
   isPublished?: true
   isPremium?: true
+  isNeetCode75?: true
+  isNeetCode150?: true
   categoryId?: true
   createdAt?: true
   updatedAt?: true
@@ -168,6 +176,8 @@ export type ProblemMaxAggregateInputType = {
   memoryLimitKb?: true
   isPublished?: true
   isPremium?: true
+  isNeetCode75?: true
+  isNeetCode150?: true
   categoryId?: true
   createdAt?: true
   updatedAt?: true
@@ -193,6 +203,8 @@ export type ProblemCountAggregateInputType = {
   memoryLimitKb?: true
   isPublished?: true
   isPremium?: true
+  isNeetCode75?: true
+  isNeetCode150?: true
   categoryId?: true
   createdAt?: true
   updatedAt?: true
@@ -305,6 +317,8 @@ export type ProblemGroupByOutputType = {
   memoryLimitKb: number
   isPublished: boolean
   isPremium: boolean
+  isNeetCode75: boolean
+  isNeetCode150: boolean
   categoryId: string | null
   createdAt: Date
   updatedAt: Date
@@ -353,6 +367,8 @@ export type ProblemWhereInput = {
   memoryLimitKb?: Prisma.IntFilter<"Problem"> | number
   isPublished?: Prisma.BoolFilter<"Problem"> | boolean
   isPremium?: Prisma.BoolFilter<"Problem"> | boolean
+  isNeetCode75?: Prisma.BoolFilter<"Problem"> | boolean
+  isNeetCode150?: Prisma.BoolFilter<"Problem"> | boolean
   categoryId?: Prisma.StringNullableFilter<"Problem"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Problem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Problem"> | Date | string
@@ -387,6 +403,8 @@ export type ProblemOrderByWithRelationInput = {
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  isNeetCode75?: Prisma.SortOrder
+  isNeetCode150?: Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -424,6 +442,8 @@ export type ProblemWhereUniqueInput = Prisma.AtLeast<{
   memoryLimitKb?: Prisma.IntFilter<"Problem"> | number
   isPublished?: Prisma.BoolFilter<"Problem"> | boolean
   isPremium?: Prisma.BoolFilter<"Problem"> | boolean
+  isNeetCode75?: Prisma.BoolFilter<"Problem"> | boolean
+  isNeetCode150?: Prisma.BoolFilter<"Problem"> | boolean
   categoryId?: Prisma.StringNullableFilter<"Problem"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Problem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Problem"> | Date | string
@@ -458,6 +478,8 @@ export type ProblemOrderByWithAggregationInput = {
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  isNeetCode75?: Prisma.SortOrder
+  isNeetCode150?: Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -491,6 +513,8 @@ export type ProblemScalarWhereWithAggregatesInput = {
   memoryLimitKb?: Prisma.IntWithAggregatesFilter<"Problem"> | number
   isPublished?: Prisma.BoolWithAggregatesFilter<"Problem"> | boolean
   isPremium?: Prisma.BoolWithAggregatesFilter<"Problem"> | boolean
+  isNeetCode75?: Prisma.BoolWithAggregatesFilter<"Problem"> | boolean
+  isNeetCode150?: Prisma.BoolWithAggregatesFilter<"Problem"> | boolean
   categoryId?: Prisma.StringNullableWithAggregatesFilter<"Problem"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Problem"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Problem"> | Date | string
@@ -516,6 +540,8 @@ export type ProblemCreateInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -549,6 +575,8 @@ export type ProblemUncheckedCreateInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -582,6 +610,8 @@ export type ProblemUpdateInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -615,6 +645,8 @@ export type ProblemUncheckedUpdateInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -648,6 +680,8 @@ export type ProblemCreateManyInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -673,6 +707,8 @@ export type ProblemUpdateManyMutationInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -697,6 +733,8 @@ export type ProblemUncheckedUpdateManyInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -722,6 +760,8 @@ export type ProblemCountOrderByAggregateInput = {
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  isNeetCode75?: Prisma.SortOrder
+  isNeetCode150?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -752,6 +792,8 @@ export type ProblemMaxOrderByAggregateInput = {
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  isNeetCode75?: Prisma.SortOrder
+  isNeetCode150?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -777,6 +819,8 @@ export type ProblemMinOrderByAggregateInput = {
   memoryLimitKb?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  isNeetCode75?: Prisma.SortOrder
+  isNeetCode150?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1000,6 +1044,8 @@ export type ProblemCreateWithoutCategoryInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   testCases?: Prisma.TestCaseCreateNestedManyWithoutProblemInput
@@ -1032,6 +1078,8 @@ export type ProblemUncheckedCreateWithoutCategoryInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   testCases?: Prisma.TestCaseUncheckedCreateNestedManyWithoutProblemInput
@@ -1093,6 +1141,8 @@ export type ProblemScalarWhereInput = {
   memoryLimitKb?: Prisma.IntFilter<"Problem"> | number
   isPublished?: Prisma.BoolFilter<"Problem"> | boolean
   isPremium?: Prisma.BoolFilter<"Problem"> | boolean
+  isNeetCode75?: Prisma.BoolFilter<"Problem"> | boolean
+  isNeetCode150?: Prisma.BoolFilter<"Problem"> | boolean
   categoryId?: Prisma.StringNullableFilter<"Problem"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Problem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Problem"> | Date | string
@@ -1118,6 +1168,8 @@ export type ProblemCreateWithoutTagsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -1150,6 +1202,8 @@ export type ProblemUncheckedCreateWithoutTagsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1198,6 +1252,8 @@ export type ProblemUpdateWithoutTagsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -1230,6 +1286,8 @@ export type ProblemUncheckedUpdateWithoutTagsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1262,6 +1320,8 @@ export type ProblemCreateWithoutTestCasesInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -1294,6 +1354,8 @@ export type ProblemUncheckedCreateWithoutTestCasesInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1342,6 +1404,8 @@ export type ProblemUpdateWithoutTestCasesInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -1374,6 +1438,8 @@ export type ProblemUncheckedUpdateWithoutTestCasesInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1406,6 +1472,8 @@ export type ProblemCreateWithoutSnippetsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -1438,6 +1506,8 @@ export type ProblemUncheckedCreateWithoutSnippetsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1486,6 +1556,8 @@ export type ProblemUpdateWithoutSnippetsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -1518,6 +1590,8 @@ export type ProblemUncheckedUpdateWithoutSnippetsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1550,6 +1624,8 @@ export type ProblemCreateWithoutSubmissionsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -1582,6 +1658,8 @@ export type ProblemUncheckedCreateWithoutSubmissionsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1630,6 +1708,8 @@ export type ProblemUpdateWithoutSubmissionsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -1662,6 +1742,8 @@ export type ProblemUncheckedUpdateWithoutSubmissionsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1694,6 +1776,8 @@ export type ProblemCreateWithoutUserProblemProgressesInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -1726,6 +1810,8 @@ export type ProblemUncheckedCreateWithoutUserProblemProgressesInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1774,6 +1860,8 @@ export type ProblemUpdateWithoutUserProblemProgressesInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -1806,6 +1894,8 @@ export type ProblemUncheckedUpdateWithoutUserProblemProgressesInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1838,6 +1928,8 @@ export type ProblemCreateWithoutExamplesInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -1870,6 +1962,8 @@ export type ProblemUncheckedCreateWithoutExamplesInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1918,6 +2012,8 @@ export type ProblemUpdateWithoutExamplesInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -1950,6 +2046,8 @@ export type ProblemUncheckedUpdateWithoutExamplesInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1982,6 +2080,8 @@ export type ProblemCreateWithoutHintsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -2014,6 +2114,8 @@ export type ProblemUncheckedCreateWithoutHintsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2062,6 +2164,8 @@ export type ProblemUpdateWithoutHintsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -2094,6 +2198,8 @@ export type ProblemUncheckedUpdateWithoutHintsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2126,6 +2232,8 @@ export type ProblemCreateWithoutFollowUpsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutProblemsInput
@@ -2158,6 +2266,8 @@ export type ProblemUncheckedCreateWithoutFollowUpsInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2206,6 +2316,8 @@ export type ProblemUpdateWithoutFollowUpsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutProblemsNestedInput
@@ -2238,6 +2350,8 @@ export type ProblemUncheckedUpdateWithoutFollowUpsInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2270,6 +2384,8 @@ export type ProblemCreateManyCategoryInput = {
   memoryLimitKb?: number
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2294,6 +2410,8 @@ export type ProblemUpdateWithoutCategoryInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   testCases?: Prisma.TestCaseUpdateManyWithoutProblemNestedInput
@@ -2326,6 +2444,8 @@ export type ProblemUncheckedUpdateWithoutCategoryInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   testCases?: Prisma.TestCaseUncheckedUpdateManyWithoutProblemNestedInput
@@ -2358,6 +2478,8 @@ export type ProblemUncheckedUpdateManyWithoutCategoryInput = {
   memoryLimitKb?: Prisma.IntFieldUpdateOperationsInput | number
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode75?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isNeetCode150?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2476,6 +2598,8 @@ export type ProblemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   memoryLimitKb?: boolean
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2511,6 +2635,8 @@ export type ProblemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   memoryLimitKb?: boolean
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2537,6 +2663,8 @@ export type ProblemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   memoryLimitKb?: boolean
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2563,12 +2691,14 @@ export type ProblemSelectScalar = {
   memoryLimitKb?: boolean
   isPublished?: boolean
   isPremium?: boolean
+  isNeetCode75?: boolean
+  isNeetCode150?: boolean
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProblemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "difficulty" | "description" | "constraints" | "solution" | "entryPoint" | "inputSignature" | "outputSignature" | "externalId" | "frontendId" | "canSubmit" | "judgeMode" | "checkerKey" | "timeLimitMs" | "memoryLimitKb" | "isPublished" | "isPremium" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+export type ProblemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "difficulty" | "description" | "constraints" | "solution" | "entryPoint" | "inputSignature" | "outputSignature" | "externalId" | "frontendId" | "canSubmit" | "judgeMode" | "checkerKey" | "timeLimitMs" | "memoryLimitKb" | "isPublished" | "isPremium" | "isNeetCode75" | "isNeetCode150" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
 export type ProblemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.Problem$categoryArgs<ExtArgs>
   testCases?: boolean | Prisma.Problem$testCasesArgs<ExtArgs>
@@ -2621,6 +2751,8 @@ export type $ProblemPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     memoryLimitKb: number
     isPublished: boolean
     isPremium: boolean
+    isNeetCode75: boolean
+    isNeetCode150: boolean
     categoryId: string | null
     createdAt: Date
     updatedAt: Date
@@ -3075,6 +3207,8 @@ export interface ProblemFieldRefs {
   readonly memoryLimitKb: Prisma.FieldRef<"Problem", 'Int'>
   readonly isPublished: Prisma.FieldRef<"Problem", 'Boolean'>
   readonly isPremium: Prisma.FieldRef<"Problem", 'Boolean'>
+  readonly isNeetCode75: Prisma.FieldRef<"Problem", 'Boolean'>
+  readonly isNeetCode150: Prisma.FieldRef<"Problem", 'Boolean'>
   readonly categoryId: Prisma.FieldRef<"Problem", 'String'>
   readonly createdAt: Prisma.FieldRef<"Problem", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Problem", 'DateTime'>

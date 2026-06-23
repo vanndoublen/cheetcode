@@ -1523,6 +1523,8 @@ export const ProblemScalarFieldEnum = {
   memoryLimitKb: 'memoryLimitKb',
   isPublished: 'isPublished',
   isPremium: 'isPremium',
+  isNeetCode75: 'isNeetCode75',
+  isNeetCode150: 'isNeetCode150',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

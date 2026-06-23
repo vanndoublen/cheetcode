@@ -48,8 +48,10 @@ model Problem {
   timeLimitMs   Int @default(1000)
   memoryLimitKb Int @default(262144)
 
-  isPublished Boolean @default(true)
-  isPremium   Boolean @default(false)
+  isPublished   Boolean @default(true)
+  isPremium     Boolean @default(false)
+  isNeetCode75  Boolean @default(false)
+  isNeetCode150 Boolean @default(false)
 
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
