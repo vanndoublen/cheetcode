@@ -1,7 +1,11 @@
 import { PAGINATION } from "@/configs/constants";
 import { Difficulty } from "@/generated/prisma/enums";
 import prisma from "@/lib/db";
-import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import {
+  baseProcedure,
+  createTRPCRouter,
+  protectedProcedure,
+} from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
 
@@ -32,6 +36,10 @@ export const problemsRouter = createTRPCRouter({
           ])
           .nullish()
           .transform((val) => val ?? undefined),
+        type: z
+          .literal(["NeetCode75", "NeetCode150"])
+          .nullish()
+          .transform((val) => val ?? undefined),
         tags: z.array(z.string()).optional(),
       }),
     )
@@ -39,7 +47,10 @@ export const problemsRouter = createTRPCRouter({
       // if (!ctx.auth.userId) {
       //   throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
       // }
-      const { page, pageSize, search, difficulty, category, tags } = input;
+      const { page, pageSize, search, difficulty, category, type, tags } =
+        input;
+      const isNeetCode75 = type === "NeetCode75" ? true : undefined;
+      const isNeetCode150 = type === "NeetCode150" ? true : undefined;
       const [items, totalCount] = await Promise.all([
         prisma.problem.findMany({
           skip: (page - 1) * pageSize,
@@ -57,7 +68,8 @@ export const problemsRouter = createTRPCRouter({
             category: {
               select: { name: true },
             },
-
+            isNeetCode75: true,
+            isNeetCode150: true,
             tags: {
               select: {
                 tag: {
@@ -76,6 +88,8 @@ export const problemsRouter = createTRPCRouter({
               contains: search,
               mode: "insensitive",
             },
+            isNeetCode75: isNeetCode75,
+            isNeetCode150: isNeetCode150,
             tags: tags?.length
               ? {
                   some: {
@@ -97,6 +111,8 @@ export const problemsRouter = createTRPCRouter({
               contains: search,
               mode: "insensitive",
             },
+            isNeetCode75: isNeetCode75,
+            isNeetCode150: isNeetCode150,
             tags: tags?.length
               ? {
                   some: {

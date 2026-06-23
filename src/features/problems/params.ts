@@ -28,6 +28,10 @@ export const problemsParams = {
   tags: parseAsArrayOf(parseAsString)
     .withDefault([])
     .withOptions({ clearOnDefault: true }),
+  type: parseAsStringLiteral([
+    "NeetCode75",
+    "NeetCode150",
+  ]).withOptions({ clearOnDefault: true }),
 };
 
 export type ProblemParams = inferParserType<typeof problemsParams>;
