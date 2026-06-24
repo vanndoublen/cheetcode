@@ -97,7 +97,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const submissionsMutate = useMutation(trpc.submissions.run.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
-                // console.log(data);
+                console.log(data);
                 setIsResultDialogOpen(true);
             },
             onError() {
