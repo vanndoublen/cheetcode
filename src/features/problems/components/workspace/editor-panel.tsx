@@ -11,7 +11,7 @@ import { useProblemWorkspace } from "../../hooks/use-problems";
 import { Language } from "@/generated/prisma/enums";
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import SubmissionOverlay from "@/components/customs/SubmissionOverlay";
 import { ResultDialog } from "@/features/submissions/components/result-dialog";
@@ -67,6 +67,7 @@ const LANGUAGE_MAP: Record<Language, string> = {
 export const EditorPanel = ({ slug }: { slug: string }) => {
     const { theme } = useTheme();
     const trpc = useTRPC();
+    const queryClient = useQueryClient();
 
 
     const { data } = useProblemWorkspace(slug);
@@ -97,7 +98,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const submissionsMutate = useMutation(trpc.submissions.run.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
-                console.log(data);
+                queryClient.invalidateQueries(trpc.submissions.getAll.queryOptions({problemSlug: slug}))
                 setIsResultDialogOpen(true);
             },
             onError() {
