@@ -98,6 +98,7 @@ export const EditorPanel = ({ slug }: { slug: string }) => {
     const submissionsMutate = useMutation(trpc.submissions.run.mutationOptions(
         {
             onSuccess(data, variables, onMutateResult, context) {
+                console.log(data);
                 queryClient.invalidateQueries(trpc.submissions.getAll.queryOptions({problemSlug: slug})); 
                 queryClient.invalidateQueries(trpc.submissions.getUserProblemProgress.queryOptions({problemSlug: slug})); 
                 setIsResultDialogOpen(true);
