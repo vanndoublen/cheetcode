@@ -6,14 +6,19 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import { NavBar } from "./nav-bar"
 import { cn } from "@/lib/utils";
 import { DotSwarm } from "./customs/OrganicLoaders"
+import CheetCodeMaw from "./customs/CheetCodeMaw"
 
 export const Header = () => {
     return (
         <header className="h-14 w-full sticky border-b top-0 z-40 backdrop-blur-md transition-all duration-200">
-            <div className="bg-transparent h-full flex items-center justify-between px-24">
+            <div className="bg-transparent h-full flex items-center justify-between px-4">
                 <Link href="/">
                     {/* <Image src="/logo.svg" alt="Cheetcode" height={32} width={32} /> */}
-                    <DotSwarm size={32} color="#ffffff"/>
+                    {/* <DotSwarm size={32} color="#ffffff"/> */}
+                    <div className="flex items-center justify-center gap-2 text-xs italic font-bold">
+                        <CheetCodeMaw size={24}/>
+                        <span>Cheeeeee</span>
+                    </div>
                 </Link>
 
                 <NavBar />
