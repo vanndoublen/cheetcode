@@ -77,6 +77,7 @@ export const problemsRouter = createTRPCRouter({
                 },
               },
             },
+            userProblemProgresses: true
           },
 
           where: {

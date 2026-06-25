@@ -13,12 +13,13 @@ import {
 
 import { useSuspenseProblems } from "../hooks/use-problems";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { CloudFreeIcons, Loading03FreeIcons, Task01FreeIcons } from "@hugeicons/core-free-icons";
+import { CheckCircle, CloudFreeIcons, HeartRemoveFreeIcons, Loading03FreeIcons, Task01FreeIcons } from "@hugeicons/core-free-icons";
 import { useAuth } from "@clerk/nextjs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Problem, ProgressStatus, UserProblemProgress } from "@/generated/prisma/client";
 
 
 const renderDifficulty = (difficulty: string) => {
@@ -89,6 +90,26 @@ const renderTag = (
   );
 };
 
+const renderStatus = (
+  status: ProgressStatus
+) => {
+  if (status === "SOLVED") {
+    return (
+      <span>
+        <HugeiconsIcon icon={CheckCircle} strokeWidth={2} className="size-3 " />
+      </span>
+    )
+  } else if (status === "ATTEMPTED") {
+    return (
+      <span>
+        <HugeiconsIcon icon={HeartRemoveFreeIcons} strokeWidth={2} className="size-3 " />
+      </span>
+    )
+  } else {
+    return <div></div>;
+  }
+}
+
 
 export const ProblemsList = () => {
   const router = useRouter();
@@ -111,6 +132,7 @@ export const ProblemsList = () => {
       <Table>
         <TableHeader className="pointer-events-none">
           <TableRow>
+            <TableHead className=""></TableHead>
             <TableHead className="w-25">No</TableHead>
             <TableHead className="truncate">Title</TableHead>
             <TableHead>Category</TableHead>
@@ -125,6 +147,9 @@ export const ProblemsList = () => {
               className="h-10! cursor-pointer"
               onClick={() => router.push(`/problems/${problem.slug}`)}
             >
+              <TableCell className="font-medium">
+                {renderStatus(problem.userProblemProgresses[0]?.status)}
+              </TableCell>
               <TableCell className="font-medium">{((problems.page - 1) * problems.pageSize) + index + 1}</TableCell>
               <TableCell
               >

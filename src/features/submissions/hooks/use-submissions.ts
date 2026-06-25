@@ -5,3 +5,10 @@ export const useSubmissions = (problemSlug: string) => {
   const trpc = useTRPC();
   return useQuery(trpc.submissions.getAll.queryOptions({ problemSlug }));
 };
+
+export const useUserProblemProgress = (problemSlug: string) => {
+  const trpc = useTRPC();
+  return useQuery(
+    trpc.submissions.getUserProblemProgress.queryOptions({ problemSlug }),
+  );
+};

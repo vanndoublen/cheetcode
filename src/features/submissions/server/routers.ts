@@ -333,6 +333,40 @@ export const submissionsRouter = createTRPCRouter({
               },
             },
           });
+
+          const allPassed = passedFlags.every(Boolean);
+
+          const existing = await prisma.userProblemProgress.findUnique({
+            where: { userId_problemId: { userId: user.id, problemId } },
+          });
+
+          await prisma.userProblemProgress.upsert({
+            where: { userId_problemId: { userId: user.id, problemId } },
+            create: {
+              userId: user.id,
+              problemId,
+              status: allPassed ? "SOLVED" : "ATTEMPTED",
+              solvedAt: allPassed ? new Date() : null,
+              bestRuntimeMs: avgRuntimeMs,
+              bestMemoryKb: avgMemoryKb,
+            },
+            update: {
+              status: allPassed ? "SOLVED" : undefined,
+              solvedAt:
+                allPassed && !existing?.solvedAt ? new Date() : undefined,
+              bestRuntimeMs:
+                avgRuntimeMs &&
+                (!existing?.bestRuntimeMs ||
+                  avgRuntimeMs < existing.bestRuntimeMs)
+                  ? avgRuntimeMs
+                  : undefined,
+              bestMemoryKb:
+                avgMemoryKb &&
+                (!existing?.bestMemoryKb || avgMemoryKb < existing.bestMemoryKb)
+                  ? avgMemoryKb
+                  : undefined,
+            },
+          });
         }
 
         return {
@@ -459,6 +493,34 @@ export const submissionsRouter = createTRPCRouter({
         },
       });
 
-      return submissions; 
+      return submissions;
+    }),
+
+  getUserProblemProgress: protectedProcedure
+    .input(
+      z.object({
+        problemSlug: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const user = await prisma.user.findUnique({
+        where: { clerkId: ctx.auth.userId },
+      });
+
+      if (!user)
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "No user found" });
+
+      const problem = await prisma.problem.findUnique({
+        where: { slug: input.problemSlug },
+        select: {
+          id: true,
+          userProblemProgresses: {
+            where: { userId: user.id },
+            take: 1,
+          },
+        },
+      });
+
+      return problem?.userProblemProgresses[0] ?? null; 
     }),
 });
