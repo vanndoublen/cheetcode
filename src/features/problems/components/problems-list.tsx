@@ -40,10 +40,12 @@ const renderDifficulty = (difficulty: string) => {
     { a0: 240, a1: 300 },
     { a0: 300, a1: 360 },
   ];
-  const pt = (ang: number): [number, number] => [
-    cx + R * Math.cos((ang * Math.PI) / 180),
-    cy + R * Math.sin((ang * Math.PI) / 180),
-  ];
+  const round = (n: number) => Math.round(n * 1000) / 1000;
+
+  const pt = (ang: number): [number, number] => {
+    const rad = (ang * Math.PI) / 180;
+    return [round(cx + R * Math.cos(rad)), round(cy + R * Math.sin(rad))];
+  };
 
   return (
     <span
